@@ -1,0 +1,44 @@
+<div *ngIf="user" >
+    <mat-toolbar class="tb">
+        <mat-toolbar-row>
+            <!-- boton toggle sidenav -->
+            <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+            <!-- EMPRESA -->
+            <div class="empresa">
+                <a class="empresaLogo" [routerLink]="['/']"> <img class="empresaImg" src="../../assets/logo.png" alt="logo"> </a>
+            </div>
+            <!-- separador -->
+            <span class="spacer"></span>
+            <!-- usuario -->
+            <div *ngIf="user" class="usuario">
+                <img *ngIf="user.photoURL" mat-card-image src={{user.photoURL}} alt="PP">
+                <img *ngIf="!user.photoURL" mat-card-image src="../../assets/pp.png" alt="PP">
+                <p> {{user.displayName}} </p>
+            </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+ 
+    <mat-sidenav-container class="sideb">
+        <mat-sidenav #snav mode="side" [opened]="showSideNav">
+            <ul class="sb-list-items">
+                <li>
+                    <a [routerLink]="['/']">
+                        <mat-icon class="icon">dashboard</mat-icon>Dashboard</a>
+                </li>
+                <span class="spacer"></span>
+                <li *ngIf="user.role=='admin'">
+                    <a [routerLink]="['/users']">
+                        <mat-icon class="icon">supervisor_account</mat-icon>Usuarios</a>
+                </li>
+                <li>
+                    <a (click)="auth.logout()">
+                        <mat-icon class="icon">exit_to_app</mat-icon>Cerrar Sesión</a>
+                </li>
+            </ul>
+        </mat-sidenav>
+ 
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
