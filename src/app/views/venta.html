@@ -1,0 +1,70 @@
+<div class="all">
+    <mat-card class="left">
+        <div *ngIf="tipoGroup" class="lSup">
+            <div *ngIf="tipoGroup.value=='servicios'" class="listContainer">
+                <div class="listHeader">
+                    <mat-form-field class="buscarInput">
+                        <input matInput (keyup)="filtrarS($event.target.value)" placeholder="Filtrar o buscar servicio...">
+                    </mat-form-field>
+                </div>
+                <div class="listBody">
+                    <div class="servList">
+                        <p *ngFor="let serv of servicios" (panright)="moveItem($event, serv, 'servicio')" (panend)="sendToTicket(serv,'servicio')" [style.transform]="serv.panstyle" [style.transition]="serv.panreturn"> <span> {{serv.descripcion}} </span>   <span>  ${{serv.precio}} </span> </p>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="tipoGroup.value=='productos'" class="listContainer">
+                <div class="listHeader">
+                    <mat-form-field class="buscarInput">
+                        <input matInput (keyup)="filtrarP($event.target.value)" placeholder="Filtrar o buscar producto...">
+                    </mat-form-field>
+                </div>
+                <div class="listBody">
+                    <div class="prodList">
+                        <button mat-stroked-button *ngFor="let prod of productos" (click)="sendToTicket(prod, 'producto')" > <img class="imgProd" src="../../assets/product1.png" alt="Product1">   {{prod.nombre}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <mat-button-toggle-group class="lInf" #tipoGroup="matButtonToggleGroup">
+            <mat-button-toggle checked value="servicios">Servicios</mat-button-toggle>
+            <mat-button-toggle value="productos">Productos</mat-button-toggle>
+        </mat-button-toggle-group>
+    </mat-card>
+    <div class="right">
+        <button id="clienteBtn" mat-raised-button color="primary" >Cliente</button>
+        <mat-card class="cuenta" >
+            <div class="datosCliente">
+                <h4>Serginho</h4>
+                <button *ngIf="recibo.articulos>0" mat-raised-button class="editTicketBtn" (click)="showElimItemsBtn()" > <mat-icon>edit</mat-icon> </button>
+            </div>
+            <div class="headers" [ngStyle]="{'grid-template-columns' : columnsTicket}"  >
+                <span *ngIf="showElimItems" ></span>
+                <span><strong>Cant.</strong></span> 
+                <span><strong>Desc.</strong></span>
+                <span><strong>Unit.</strong></span>
+                <span><strong>Total</strong></span>
+            </div>
+            <div *ngFor="let el of recibo.elements" class="carrito" (panleft)="moveItem($event, el, 'ticket')" (panend)="deleteItemFromTicket(el)" [style.transform]="el.panstyleT" [style.transition]="el.panreturn" [ngStyle]="{'grid-template-columns' : columnsTicket}" >
+                <span *ngIf="showElimItems" > <button mat-raised-button class="editTicketBtn" (click)="deleteItemFromTicket(el)" >X</button>  </span>
+                <span>{{el.cant}} </span>
+                <span>{{el.nombre}}</span>
+                <span>${{el.precio}} </span>
+                <span><strong>${{el.total}} </strong></span>
+               
+            </div>
+            <div *ngIf="recibo.articulos>0" class="totales">
+                <span class="totL" >Productos <strong>{{recibo.articulos}}</strong> </span> <div></div>
+                <span class="totL">Sub-total</span><strong class="totR" >${{recibo.subtotal}} </strong>
+                <span class="totL">I.V.A.</span><strong class="totR"> ${{recibo.iva}} </strong>
+                <strong class="totL">Total</strong><strong class="totR">${{recibo.total}} </strong>
+            </div>
+            <div *ngIf="recibo.articulos>0" class="botonesCuenta">
+                <button mat-raised-button id="cobrar" >Cobrar</button>
+                <button mat-raised-button id="cancelar" (click)="cancelarTicket()" >Cancelar</button>
+            </div>
+        </mat-card>
+    </div>
+</div> 

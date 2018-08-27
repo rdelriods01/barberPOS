@@ -1,0 +1,196 @@
+.all{
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    grid-gap: 1em;
+    padding: 1em;
+    background-color: #212121;
+    min-height: -moz-calc(100vh - 4.5em);
+    min-height: -webkit-calc(100vh - 4.5em);
+    min-height: calc(100vh - 4.5em);
+}
+mat-card{
+    border-radius: 10px;
+}
+/* LEFT */
+.left{
+    background-color: #212121;
+    height: 90vh;
+    display: grid;
+    grid-template-rows: 8fr 1fr;
+    padding: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.lSup{
+    border: 4px solid #796600;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow-y: hidden;
+}
+.listContainer{
+    display: grid;
+    grid-template-rows: 5em auto;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.listHeader {
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    display: flex;
+}
+.buscarInput{
+    padding: 0.5em 2em 0 2em;
+    width: 100%;
+    color: #796600;
+}
+.listBody{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-right: 17px;
+    padding-bottom: 17px;
+    width: 100%;
+    box-sizing: content-box;
+}
+.servList{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 1em;
+    grid-gap: 1em;
+}
+.servList p{
+    border: 2px solid saddlebrown;
+    color: white;
+    min-height: 3em;
+    border-radius: 8px;
+    text-align: center;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-content: center;
+}
+.servList p span{
+    display: grid;
+    align-content: center;
+}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label{
+    color: gray;
+}
+.prodList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1em;
+    padding: 1em;
+}
+.prodList button{
+    border: 2px solid saddlebrown;
+    color: white;
+    min-height: 5em;
+    border-radius: 8px;
+    white-space: normal;
+    line-height: normal;
+}
+.imgProd{
+    width: 100%;
+    margin: 0.6em 0;
+}
+
+.lInf{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+mat-button-toggle{
+    font-size: 2em;
+    background-color: #212121;
+    color: #796600;
+}
+.mat-button-toggle-checked{
+    background-color: #796600;
+    color: ghostwhite;
+}
+::ng-deep .mat-button-toggle-button{
+    height: 100%;
+    width: 100%;
+}
+/* RIGHT */
+#clienteBtn{
+    line-height: 3em;
+    margin: 0 0 1em 40%;
+    width: 60%;
+    display: block;
+    font-size: 1em;
+    border-radius: 8px;
+}
+.cuenta{
+    display: grid;
+    grid-template-rows: 2em 2em auto auto 3fr;
+    min-height: 14em;
+    background-image: url(../../assets/logo.png)
+}
+.datosCliente{
+    align-self: center;
+    height: 2em;
+    line-height: 2em;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+}
+.datosCliente h4{
+    margin: 0;
+    text-align: center;
+}
+.editTicketBtn{
+    background-color: lightgray;
+    min-width: 1em;
+    width: 2em;
+    height: 2em;
+    font-size: 1.2em;
+    padding: 0;
+    color: grey;
+    zoom: 70%;
+    margin: auto;
+}
+.headers{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 0.8em
+}
+.carrito{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    font-size: 0.8em;
+    height: auto;
+    min-height: 2em;
+    border-top: 1px solid lightgray;
+    padding: 0.3em 0;
+}
+
+.totales{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 1em 0;
+}
+.totL{
+    text-align: right;
+}
+.totR{
+    text-align: center;
+}
+.botonesCuenta{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+#cobrar{
+    background-color: #8BC34A;
+    color: white;
+    font-weight: bolder;
+}
+#cancelar{
+    background-color: #9E9E9E;
+    margin: auto;
+}

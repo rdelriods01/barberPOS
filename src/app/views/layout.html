@@ -21,9 +21,17 @@
     <mat-sidenav-container class="sideb">
         <mat-sidenav #snav mode="side" [opened]="showSideNav">
             <ul class="sb-list-items">
+                <li *ngIf="user.role=='admin'">
+                    <a [routerLink]="['/db']">
+                        <mat-icon class="icon">dashboard</mat-icon>Dashboard</a>
+                </li>
                 <li>
                     <a [routerLink]="['/']">
-                        <mat-icon class="icon">dashboard</mat-icon>Dashboard</a>
+                        <mat-icon class="icon">store</mat-icon>Venta</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/pys']">
+                        <mat-icon class="icon">ballot</mat-icon>Productos y Servicios</a>
                 </li>
                 <span class="spacer"></span>
                 <li *ngIf="user.role=='admin'">
@@ -37,7 +45,7 @@
             </ul>
         </mat-sidenav>
  
-        <mat-sidenav-content>
+        <mat-sidenav-content class="rutas">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

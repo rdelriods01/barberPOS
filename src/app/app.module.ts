@@ -22,10 +22,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 // Servicios ==========================
 import { AuthService } from './services/auth.service';
+import { ServicioService } from './services/servicios.service';
+import { ProductoService } from './services/productos.service';
  
 // Componentes ========================
 import { AppComponent } from './app.component';
@@ -33,11 +40,15 @@ import { LoginComponent } from './components/login.component';
 import { LayoutComponent } from './components/layout.component';
 import { DashboardComponent } from './components/dashboard.component';
 import { UsersComponent } from './components/users.component';
- 
+import { VentaComponent } from './components/venta.component';
+import { ProdYServComponent } from './components/prodyserv.component';
+
 // Rutas =============================
 const routes: Routes = [
   { path:'', component: LayoutComponent ,children:[
-    { path:'', component: DashboardComponent},
+    { path:'', component: VentaComponent},
+    { path:'db', component: DashboardComponent},
+    { path:'pys', component: ProdYServComponent},
     { path:'users', component: UsersComponent },
   ]},
   { path:'login', component: LoginComponent},
@@ -51,6 +62,8 @@ const routes: Routes = [
     LayoutComponent,
     DashboardComponent,
     UsersComponent,
+    VentaComponent,
+    ProdYServComponent
   ],
   entryComponents:[],
   imports: [
@@ -67,10 +80,13 @@ const routes: Routes = [
     AngularFireStorageModule,
     // Material
     MatToolbarModule, MatButtonModule, MatIconModule, MatCardModule, MatInputModule,
-    MatFormFieldModule, MatSidenavModule, MatSelectModule
+    MatFormFieldModule, MatSidenavModule, MatSelectModule, MatButtonToggleModule,
+    MatTabsModule, MatTableModule, MatPaginatorModule, MatSortModule
   ],
   providers: [
     AuthService,
+    ServicioService,
+    ProductoService
   ],
   bootstrap: [AppComponent]
 })

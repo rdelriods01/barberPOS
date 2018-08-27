@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
  
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
  
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { EmailAuthProvider } from '../../../node_modules/@firebase/auth-types';
+import { EmailAuthProvider } from '@firebase/auth-types';
  
 import { IUser } from '../models/interfaces';
  

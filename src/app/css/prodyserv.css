@@ -1,0 +1,60 @@
+.all{
+    padding: 1em;
+    background-color: #f9f9f9;
+    min-height: -moz-calc(100vh - 4.5em);
+    min-height: -webkit-calc(100vh - 4.5em);
+    min-height: calc(100vh - 4.5em);
+    display: grid;
+    grid-template-rows: 10vh auto;
+}
+.sup{
+    text-align: end;
+}
+.mainSupBtn{
+    width: 12em;
+    margin-left: 1em;
+}
+.tablaBuscar {
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    display: flex;
+    background-color: white;
+    margin: 1em 0 0.5em 0;
+}
+.buscarInput{
+    padding: 0.5em 2em 0 2em;
+}
+table {
+    width: 100%;
+    text-align-last: center;
+}
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+td, th {
+    width: 25%;
+}
+::ng-deep .mat-sort-header-container{
+    justify-content: center;
+}
+/* SERVICIOS */
+.newServForm{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 2em;
+    margin: 1em;
+    padding: 2em;
+    border: 3px dashed goldenrod;
+    border-radius: 8px;
+}
+/* PRODUCTOS */
+.newProdForm{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-gap: 2em;
+    margin: 1em;
+    padding: 2em;
+    border: 3px dashed goldenrod;
+    border-radius: 8px;
+}
+  

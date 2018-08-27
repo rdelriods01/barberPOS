@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LayoutComponent {
  
-  showSideNav:Boolean=true;
+  showSideNav:Boolean=false;
   user;
  
   constructor(public auth: AuthService) {

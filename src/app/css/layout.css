@@ -4,6 +4,7 @@
     position: fixed;
     z-index: 10;
     background: #fff;
+    margin-top: -2em;
 }
 .tb mat-icon {
     transition: transform 1s;
@@ -61,7 +62,7 @@
 }
 .usuario:hover p {
     transform: translateX(-10px);
-}
+} 
 .usuario:hover img {
     transform: scale(1.2, 1.2);
 }
@@ -69,7 +70,10 @@
 /*SideBar*/
  
 .sideb {
-    padding-top: 2.5em;
+    margin-top: 2.5em;
+    height: -moz-calc(100vh - 2.5em);
+    height: -webkit-calc(100vh - 2.5em);
+    height: calc(100vh - 2.5em);
 }
 mat-sidenav {
     position: fixed;
@@ -113,7 +117,9 @@ li a:hover {
 a mat-icon:hover {
     transform: rotate(0deg);
 }
-.rutas {
-    padding: 1em;
-    background-color: #eee;
-}
+
+/* Content */
+
+/* .rutas {
+    display: table;
+} */
