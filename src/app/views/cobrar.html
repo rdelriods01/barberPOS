@@ -1,0 +1,77 @@
+<mat-card>
+    <div class="all">
+        <div class="left">
+            <h1>Total a Pagar:</h1>
+            <h3 id="total" >${{recibo.total}}</h3>
+            <div *ngIf="pagacon>0" class="gridCambio">
+                <p [style.color]="porpagarColor" >por pagar:</p><span [style.color]="porpagarColor"><strong>${{porpagar}}</strong></span>
+                <p [style.color]="cambioColor" >cambio:</p><span [style.color]="cambioColor" [style.font-size]="cambioFontSize" ><strong>${{cambio}}</strong></span>
+            </div>
+            <button *ngIf="porpagar==0" mat-raised-button class="cobrar" (click)="sendTicket()" >Aceptar</button>
+            <button *ngIf="formTarjeta.form.valid && formaDePago=='tarjeta'" mat-raised-button class="cobrar" style="bottom:-3.2em" (click)="sendTicket()">Aceptar</button>
+        </div>
+        <div class="right">
+            <div class="pago">
+                <div class="radioFormaDePago">
+                    <mat-radio-group [(ngModel)]='formaDePago' (change)="reset();calcular()" >
+                        <mat-radio-button value="efectivo">Efectivo</mat-radio-button>
+                        <mat-radio-button value="tarjeta">Tarjeta</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div *ngIf="formaDePago=='efectivo'"  class="efectivo">
+                    <input class="inputKB" type="text" (keyup)="calcular()" [(ngModel)]="pagacon" value="pagacon" readonly >
+                    <div class="KB">
+                        <div class="numKB">
+                            <div class="num1-9">
+                                <button mat-stroked-button (click)="sendNum('1')" > 1 </button>
+                                <button mat-stroked-button (click)="sendNum('2')" > 2 </button>
+                                <button mat-stroked-button (click)="sendNum('3')" > 3 </button>
+                                <button mat-stroked-button (click)="sendNum('4')" > 4 </button>
+                                <button mat-stroked-button (click)="sendNum('5')" > 5 </button>
+                                <button mat-stroked-button (click)="sendNum('6')" > 6 </button>
+                                <button mat-stroked-button (click)="sendNum('7')" > 7 </button>
+                                <button mat-stroked-button (click)="sendNum('8')" > 8 </button>
+                                <button mat-stroked-button (click)="sendNum('9')" > 9 </button>
+                            </div>
+                            <div class="num0-00">
+                                <button mat-stroked-button (click)="sendNum('0')" > 0 </button>
+                                <button mat-stroked-button (click)="sendNum('00')" > 00 </button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="back">
+                                <button mat-stroked-button (click)="sendNum('back')" > <mat-icon>keyboard_backspace</mat-icon> </button>
+                                <button mat-stroked-button (click)="sendNum('clear')" > <mat-icon>clear</mat-icon> </button>
+                                <button mat-stroked-button (click)="sendNum('.')" > . </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <form #formTarjeta="ngForm">
+                    <div *ngIf="formaDePago=='tarjeta'" class="tarjeta">
+                        <ol>
+                            <li>Seleccione tipo de tarjeta</li>
+                            <mat-radio-group class="tipoTarjeta" name="tipoDeTarjeta" [(ngModel)]='tipoDeTarjeta' required>
+                                <mat-radio-button value="visamastercard">Visa / MasterCard</mat-radio-button>
+                                <mat-radio-button value="amex">American Express</mat-radio-button>
+                            </mat-radio-group>
+                            <li>Ingrese últimos 4 digitos de la tarjeta</li>
+                            <div class="digitos">
+                                <p  *ngIf="tipoDeTarjeta=='visamastercard'" >XXXX-XXXX-XXXX-</p>
+                                <p *ngIf="tipoDeTarjeta=='amex'" >XXXX-XXXXXX-X</p>
+                                <input type="text" name="digitos" [(ngModel)]="digitos" pattern="\d{4}" placeholder="1234" required>
+                            </div>
+                            <li>Realice transacción en terminal</li>
+                            <p class="espacio" > <mat-icon>credit_card</mat-icon> </p>
+                            <li>Ingrese número de autorización</li>
+                            <p class="autorizacion">
+                                <input type="text" name="autorizacion" [(ngModel)]="autorizacion" pattern="\d{6}" placeholder="123456" required>
+                            </p>
+                        </ol>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-card>

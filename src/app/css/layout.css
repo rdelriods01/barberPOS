@@ -123,3 +123,8 @@ a mat-icon:hover {
 /* .rutas {
     display: table;
 } */
+@media print{
+    .all{
+        display: none;
+    }   
+}

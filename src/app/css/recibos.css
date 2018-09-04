@@ -1,0 +1,23 @@
+.header{
+    text-align: center;
+}
+.tablaBuscar {
+    display: flex;
+    background-color: white;
+    margin: 1em 0 0.5em 0;
+}
+.buscarInput{
+    padding: 0.5em 2em 0 2em;
+    width: 100%;
+}
+table {
+    width: 100%;
+    text-align-last: center;
+}
+::ng-deep .mat-sort-header-container{
+    justify-content: center;
+}
+.littleBtn{
+    min-width: 2em;
+    margin: 0 0.2em;
+}

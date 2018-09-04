@@ -90,8 +90,8 @@ mat-card{
     line-height: normal;
 }
 .imgProd{
-    width: 100%;
     margin: 0.6em 0;
+    max-height: 10vh;
 }
 
 .lInf{
@@ -128,18 +128,18 @@ mat-button-toggle{
     display: grid;
     grid-template-rows: 2em 2em auto auto 3fr;
     min-height: 14em;
-    background-image: url(../../assets/logo.png)
 }
 .datosCliente{
     align-self: center;
     height: 2em;
     line-height: 2em;
     display: grid;
-    grid-template-columns: 6fr 1fr;
+    grid-template-columns: 6fr 2.4em;
 }
 .datosCliente h4{
     margin: 0;
     text-align: center;
+    padding-left: 2.4em;
 }
 .editTicketBtn{
     background-color: lightgray;

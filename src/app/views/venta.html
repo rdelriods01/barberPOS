@@ -9,7 +9,7 @@
                 </div>
                 <div class="listBody">
                     <div class="servList">
-                        <p *ngFor="let serv of servicios" (panright)="moveItem($event, serv, 'servicio')" (panend)="sendToTicket(serv,'servicio')" [style.transform]="serv.panstyle" [style.transition]="serv.panreturn"> <span> {{serv.descripcion}} </span>   <span>  ${{serv.precio}} </span> </p>
+                        <p *ngFor="let serv of servicios" (panright)="moveItem($event, serv, 'servicio')" (panend)="sendToTicket(serv,'servicio')" (click)="sendToTicket(serv,'servicio')" [style.transform]="serv.panstyle" [style.transition]="serv.panreturn"> <span> {{serv.descripcion}} </span>   <span>  ${{serv.precio}} </span> </p>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,10 @@
                 </div>
                 <div class="listBody">
                     <div class="prodList">
-                        <button mat-stroked-button *ngFor="let prod of productos" (click)="sendToTicket(prod, 'producto')" > <img class="imgProd" src="../../assets/product1.png" alt="Product1">   {{prod.nombre}}</button>
+                        <button mat-stroked-button *ngFor="let prod of productos" (click)="sendToTicket(prod, 'producto')" > 
+                            <img *ngIf="prod.photourl" class="imgProd" [src]="prod.photourl" alt="Product1">
+                            <p style="margin-top:0" >{{prod.nombre}}</p>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -34,10 +37,10 @@
         </mat-button-toggle-group>
     </mat-card>
     <div class="right">
-        <button id="clienteBtn" mat-raised-button color="primary" >Cliente</button>
+        <button id="clienteBtn" mat-raised-button color="primary" (click)="openClientes()" >Cliente</button>
         <mat-card class="cuenta" >
             <div class="datosCliente">
-                <h4>Serginho</h4>
+                <h4>{{cliente.nombre}}</h4>
                 <button *ngIf="recibo.articulos>0" mat-raised-button class="editTicketBtn" (click)="showElimItemsBtn()" > <mat-icon>edit</mat-icon> </button>
             </div>
             <div class="headers" [ngStyle]="{'grid-template-columns' : columnsTicket}"  >
@@ -62,7 +65,7 @@
                 <strong class="totL">Total</strong><strong class="totR">${{recibo.total}} </strong>
             </div>
             <div *ngIf="recibo.articulos>0" class="botonesCuenta">
-                <button mat-raised-button id="cobrar" >Cobrar</button>
+                <button mat-raised-button id="cobrar" (click)="openCobrar()" >Cobrar</button>
                 <button mat-raised-button id="cancelar" (click)="cancelarTicket()" >Cancelar</button>
             </div>
         </mat-card>

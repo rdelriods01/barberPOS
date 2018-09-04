@@ -1,3 +1,11 @@
 .all{
     height: 92.4vh;
+    text-align: center;
+}
+.usersCard{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    width: 50vh;
+    border-radius: 20px;
 }

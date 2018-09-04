@@ -1,0 +1,129 @@
+.mat-dialog-container{
+    background-color: darkgoldenrod !important;
+}
+.mat-card{
+    border-radius: 20px !important;
+    min-height: 51vh !important;
+    max-height: 70vh !important;
+    overflow: auto !important;
+    background-color: #212121 !important;
+    color: #796600;
+}
+.all{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+h1{
+    text-align: center;
+}
+#total{
+    font-size: 5em;
+    text-align: center;
+    margin: auto;
+    color: whitesmoke;
+}
+.gridCambio{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.gridCambio p{
+    text-align: right;
+    padding-right: 1em;
+}
+.gridCambio span{
+    margin: auto;
+    margin-left: 0;
+}
+.cobrar{
+    background-color: #8BC34A;
+    color: white;
+    font-weight: bolder;
+    width: 92%;
+    font-size: 2em;
+    height: 2em;
+    margin: 0.7em auto;
+    border-radius: 10px;
+    display: block;
+}
+/* RIGHT */
+.pago{
+    color: darkgray;
+}
+.radioFormaDePago{
+    margin-bottom: 1em;
+}
+mat-radio-button{
+    margin-right: 1em;
+}
+/* KEYBOARD */
+.inputKB{
+    background-color: #212121;
+    border: 1px solid gray;
+    border-radius: 10px;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 0.2em;
+    width: 100%;
+    display: block;
+}
+.KB{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+.KB div div button{
+    border: 2px solid saddlebrown;
+    color: white;
+    min-height: 5em;
+    border-radius: 8px;
+    white-space: normal;
+    line-height: normal;
+}
+.num1-9{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.num0-00{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.back{
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+}
+
+
+/* RIGHT TARJETA */
+.tarjeta{
+    margin-top: 2em;
+}
+.tarjeta ol li{
+    font-weight: bold;
+}
+.tipoTarjeta{
+    margin: 1em 0;
+    display: block;
+    text-align: center;
+}
+.digitos{
+    display: flex;
+    justify-content: center;
+}
+.digitos input{
+    margin: 1em;
+    width: 5em;
+    margin-left: 0;
+}
+.espacio{
+    text-align: center;
+}
+.espacio mat-icon{
+    font-size: 2em;
+}
+.autorizacion{
+    text-align: center;
+}
+.autorizacion input{
+    width: 10em;
+    height: 1.4em;
+}

@@ -17,7 +17,7 @@
                             <input matInput name="descripcionS" [(ngModel)]="descripcionS" placeholder="Descripción del Servicio..." required>
                         </mat-form-field>
                         <mat-form-field>
-                            <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioS" [(ngModel)]="precioS" placeholder="Precio... (ej. 499.99)" required>
+                            <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioS" [(ngModel)]="precioS" placeholder="Precio... (ej. 199.99)" required>
                         </mat-form-field>                    
                     </div>
                 </form>
@@ -46,7 +46,9 @@
                             <!-- Precio Column -->
                             <ng-container matColumnDef="acciones">
                             <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                            <td mat-cell *matCellDef="let row"> <button color="warn" mat-raised-button (click)="eliminarServicio(row.descripcion, row.uid)"  >Eliminar</button> </td>
+                            <td mat-cell *matCellDef="let row"> 
+                                <button class="deleteBtn" color="warn" mat-raised-button (click)="eliminarServicio(row.descripcion, row.uid)"  ><mat-icon>delete</mat-icon></button> 
+                            </td>
                             </ng-container>
                         
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsS"></tr>
@@ -68,16 +70,19 @@
                         <button *ngIf="showNewProd" color="accent" mat-raised-button (click)="showNewProd=!showNewProd"> <mat-icon>arrow_back</mat-icon> </button>
                         <button *ngIf="showNewProd" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewProd=!showNewProd; guardarNuevoProducto()" [disabled]="!formNewProd.form.valid">Guardar</button>
                     </div>
-                    <div *ngIf="showNewProd" [@animationNewServ]="showNewProd"  class="newProdForm">
-                        <mat-form-field>
-                            <input matInput name="skuP" [(ngModel)]="skuP" placeholder="SKU del Producto..." required>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput name="nombreP" [(ngModel)]="nombreP" placeholder="Nombre..." required>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioP" [(ngModel)]="precioP" placeholder="Precio... (ej. 499.99)" required>
-                        </mat-form-field>                    
+                    <div *ngIf="showNewProd" [@animationNewServ]="showNewProd" >
+                        <div class="newProdForm">
+                            <mat-form-field>
+                                <input matInput name="skuP" [(ngModel)]="skuP" placeholder="SKU del Producto..." required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput name="nombreP" [(ngModel)]="nombreP" placeholder="Nombre..." required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioP" [(ngModel)]="precioP" placeholder="Precio... (ej. 499.99)" required>
+                            </mat-form-field>  
+                        </div>
+                                         
                     </div>
                 </form>
                 <div class="tabla">
@@ -99,7 +104,9 @@
                             <!-- Nombre Column -->
                             <ng-container matColumnDef="nombre">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+                            <td mat-cell *matCellDef="let row"> 
+                                {{row.nombre}}
+                            </td>
                             </ng-container>
                         
                             <!-- Precio Column -->
@@ -108,10 +115,26 @@
                             <td mat-cell *matCellDef="let row"> ${{row.precio}} </td>
                             </ng-container>
 
+                            <!-- Foto Column -->
+                            <ng-container matColumnDef="foto">
+                                <th mat-header-cell *matHeaderCellDef> Foto </th>
+                                <td mat-cell *matCellDef="let row"> 
+                                    <img *ngIf="row.photourl" class="photoProd" [src]="row.photourl" alt="photo">
+                                </td>
+                            </ng-container>
+
                             <!-- Acciones Column -->
                             <ng-container matColumnDef="acciones">
                             <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                            <td mat-cell *matCellDef="let row"> <button color="warn" mat-raised-button (click)="eliminarProducto(row.nombre, row.uid)"  >Eliminar</button> </td>
+                            <td mat-cell *matCellDef="let row" > 
+                                <div >
+                                    <label class="labelFile mat-raised-button mat-primary" ><mat-icon>photo_camera</mat-icon><input type="file" class="inputfile" (change)="subirFoto($event, row)" /></label>
+                                    <button class="deleteBtn" color="warn" mat-raised-button (click)="eliminarProducto(row.nombre, row.uid)"  > <mat-icon>delete</mat-icon></button>
+                                </div> 
+                                <div *ngIf="row.showProgressBar" style="width: 94%" >
+                                    <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar> <span>{{uploadPercent | async | number:'1.0-0'}}%</span>
+                                </div>
+                            </td>
                             </ng-container>
                         
                             <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>

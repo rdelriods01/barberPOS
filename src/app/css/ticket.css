@@ -1,0 +1,74 @@
+.ticket{
+    width: 30vw;
+    /* max-height: 65vh; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-radius: 20px;
+}
+.logo{
+    text-align: center;
+}
+.logo img{
+    max-width: 25vw;
+}
+.misDatos{
+    margin: 1em 0;
+    text-align: center;
+}
+.datosSuperior{
+    margin: 1em 0;
+}
+.datosCliente{
+    text-align: center;
+    margin: 1em 0;
+}
+.headers{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+}
+.carrito{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    height: auto;
+    min-height: 2em;
+}
+.datosInferior{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 1em 0;
+}
+.datosInferior span{
+    text-align: right;
+}
+.datosInferior strong{
+    text-align: center;
+}
+.total{
+    font-size: 1.5em;
+}
+.pago{
+    margin: 1em 0;
+}
+.pago p{
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.footer{
+    text-align: center;
+    margin-top: 2em;
+}
+
+@media print{
+    .ticket, ::ng-deep .mat-dialog-container{
+        border-radius: 0 !important;
+    }
+    ::ng-deep .mat-dialog-container{
+        padding: 0;
+        box-shadow: none;
+    }
+}

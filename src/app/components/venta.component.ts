@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import {MatDialog } from '@angular/material';
 
 import { AuthService } from '../services/auth.service';
 import { ServicioService } from '../services/servicios.service';
 import { ProductoService } from '../services/productos.service';
+import { ReciboService } from "../services/recibos.service";
+import { IRecibo, ICliente } from '../models/interfaces';
 
-import { IRecibo } from '../models/interfaces';
+import { BuscarAgregarClienteComponent } from "../components/buscaragregarcliente.component";
+import { CobrarComponent } from "../components/cobrar.component";
+import { TicketComponent } from "../components/ticket.component";
 
 @Component({
   selector: 'ventaC',
@@ -17,17 +22,23 @@ export class VentaComponent {
     servicios;
     backupProductos;
     productos;
-    recibo; 
+    recibo = {} as IRecibo; 
 
     showElimItems=false;
     columnsTicket="1fr 4fr 1fr 1fr";
 
-    constructor( public _serviciosS:ServicioService,
+    cliente= {} as ICliente;
+
+    constructor( public _recibosS: ReciboService,
+                 public _serviciosS:ServicioService,
                  public _productosS: ProductoService,
-                 public auth: AuthService){
+                 public _authS: AuthService,
+                 public dialog: MatDialog){
+        // IniciarCliente
+        this.cliente.nombre='Público en General';
+        this.cliente.uid='XAXX010101000';
         //  Iniciar Recibo
-        this.recibo = {} as IRecibo;
-        this.auth.user.subscribe(us=>{
+        this._authS.user.subscribe(us=>{
             this.recibo.barber=us.displayName;           
         })
         this.recibo.elements=[];
@@ -84,7 +95,6 @@ export class VentaComponent {
         this.recibo.total=(Math.round(Number(this.recibo.total)*100)/100).toFixed(2);
         this.recibo.subtotal=Math.round(Number(this.recibo.total)/1.16).toFixed(2);
         this.recibo.iva=Math.round(Number(this.recibo.total)*0.16).toFixed(2);
-        console.log(this.recibo);
     }
 
     showElimItemsBtn(){
@@ -123,7 +133,6 @@ export class VentaComponent {
         this.recibo.total=(Math.round(Number(this.recibo.total)*100)/100).toFixed(2);
         this.recibo.subtotal=Math.round(Number(this.recibo.total)/1.16).toFixed(2);
         this.recibo.iva=Math.round(Number(this.recibo.total)*0.16).toFixed(2);
-        console.log(this.recibo);
     }
     cancelarTicket(){
         this.recibo.elements=[];
@@ -133,6 +142,13 @@ export class VentaComponent {
         this.recibo.total='0.00';
         this.columnsTicket="1fr 4fr 1fr 1fr";
         this.showElimItems=false;
+        this.cliente.nombre='Público en General';
+        this.cliente.apellido='';
+        this.cliente.telefono='';
+        this.cliente.correo='';
+        this.cliente.uid='XAXX010101000';
+        // this.cliente.categoria='';
+        
     }
 
 
@@ -155,4 +171,41 @@ export class VentaComponent {
         return filtrado;
       }
 
+    //   DIALOG para buscar o agregar clientes
+    openClientes(){
+        const dialogRef = this.dialog.open(BuscarAgregarClienteComponent, {
+            width: '200em',
+        });
+      
+        dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if(result){
+            this.cliente = result;
+        }
+        console.log(this.cliente);
+        
+        });
+    }
+
+    openCobrar(){
+        let ticket = JSON.parse(JSON.stringify(this.recibo))
+        for(let i=0; i < ticket.elements.length;i++){
+            delete ticket.elements[i].descripcion;
+            delete ticket.elements[i].panreturn;
+            delete ticket.elements[i].panstyle;
+        }
+        ticket.cliente=this.cliente.nombre;
+        ticket.clienteid=this.cliente.uid;
+        ticket.fecha=new Date();
+        ticket.fecha=ticket.fecha.getTime();
+        const dialogRef = this.dialog.open(CobrarComponent)
+        dialogRef.componentInstance.recibo=ticket;
+        dialogRef.afterClosed().subscribe(result=>{
+            if(result.flag=='sended'){
+                this.cancelarTicket();
+                let dialogTicket = this.dialog.open(TicketComponent);
+                dialogTicket.componentInstance.recibo=result.data;
+            }
+        })
+    }
 }

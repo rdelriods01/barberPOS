@@ -1,0 +1,58 @@
+<mat-card>
+    <form #formNewCliente="ngForm">
+        <div class="sup">
+            <h3>Buscar o agregar cliente</h3>
+            <button *ngIf="!showNewCliente" mat-raised-button class="supBtns" (click)="showNewCliente=!showNewCliente; showForm()">Agregar nuevo cliente</button>
+            <div class="supBtns">
+                <button *ngIf="showNewCliente" color="accent" mat-raised-button (click)="showNewCliente=!showNewCliente; hideForm()"> <mat-icon>arrow_back</mat-icon> </button>
+                <button *ngIf="showNewCliente" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewCliente=!showNewCliente; agregarCliente()" [disabled]="!formNewCliente.form.valid">Guardar</button>
+            </div>
+        </div>
+        <div class="newForm" [style.height]="heightNewForm" [style.transition]="transitionNewForm" [style.opacity]="opacityNewCForm" >
+            <h3>Ingresa los datos del Cliente</h3>
+            <div class="gridNewClient">
+                <mat-form-field>
+                    <input matInput name="nombre" [(ngModel)]="cliente.nombre" placeholder="Nombre" required >
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput name="apellido" [(ngModel)]="cliente.apellido" placeholder="Apellido" required >
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="tel" pattern="\d{4}\-\d{4}" name="telefono" [(ngModel)]="cliente.telefono" placeholder="Teléfono 1234-5678" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput name="correo" [(ngModel)]="cliente.correo" placeholder="E-mail" type="email">
+                </mat-form-field> 
+            </div>                  
+        </div>
+    </form>
+
+    <div class="tablaBuscar">
+        <mat-form-field class="buscarInput">
+            <input matInput (keyup)="filtrarC($event.target.value)" placeholder="Buscar nombre o teléfono..." cdkFocusInitial>
+        </mat-form-field>
+    </div>
+    <table *ngIf="showTable"  >
+        <thead>
+            <tr class="rowHeader">
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cli of clientes" class="rowData" >
+                <td > {{cli.nombre}} {{cli.apellido}}  </td>
+                <td > {{cli.telefono}}</td>
+                <button mat-raised-button class="selectBtn" color="accent" [mat-dialog-close]="cli" cdkFocusInitial>Seleccionar</button>
+            </tr> 
+        </tbody>
+    </table>
+
+
+
+<!-- 
+
+    <button mat-button (click)="onNoClick()">Regresar</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="cliente" cdkFocusInitial>Ok</button> -->
+</mat-card>

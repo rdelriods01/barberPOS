@@ -27,13 +27,18 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 // Servicios ==========================
 import { AuthService } from './services/auth.service';
 import { ServicioService } from './services/servicios.service';
 import { ProductoService } from './services/productos.service';
- 
+import { ClienteService } from './services/clientes.service';
+import { ReciboService } from "./services/recibos.service";
+
 // Componentes ========================
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login.component';
@@ -42,6 +47,10 @@ import { DashboardComponent } from './components/dashboard.component';
 import { UsersComponent } from './components/users.component';
 import { VentaComponent } from './components/venta.component';
 import { ProdYServComponent } from './components/prodyserv.component';
+import { BuscarAgregarClienteComponent } from './components/buscaragregarcliente.component';
+import { CobrarComponent } from './components/cobrar.component';
+import { TicketComponent } from './components/ticket.component';
+import { RecibosComponent } from './components/recibos.component';
 
 // Rutas =============================
 const routes: Routes = [
@@ -49,7 +58,8 @@ const routes: Routes = [
     { path:'', component: VentaComponent},
     { path:'db', component: DashboardComponent},
     { path:'pys', component: ProdYServComponent},
-    { path:'users', component: UsersComponent },
+    { path:'tickets', component: RecibosComponent},
+    { path:'users', component: UsersComponent},
   ]},
   { path:'login', component: LoginComponent},
   { path:'**', redirectTo: '', pathMatch: 'full'}
@@ -63,9 +73,13 @@ const routes: Routes = [
     DashboardComponent,
     UsersComponent,
     VentaComponent,
-    ProdYServComponent
+    ProdYServComponent,
+    BuscarAgregarClienteComponent,
+    CobrarComponent, 
+    TicketComponent, 
+    RecibosComponent
   ],
-  entryComponents:[],
+  entryComponents:[BuscarAgregarClienteComponent, CobrarComponent, TicketComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -81,12 +95,15 @@ const routes: Routes = [
     // Material
     MatToolbarModule, MatButtonModule, MatIconModule, MatCardModule, MatInputModule,
     MatFormFieldModule, MatSidenavModule, MatSelectModule, MatButtonToggleModule,
-    MatTabsModule, MatTableModule, MatPaginatorModule, MatSortModule
+    MatTabsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule,
+    MatRadioModule, MatProgressBarModule
   ],
   providers: [
     AuthService,
     ServicioService,
-    ProductoService
+    ProductoService,
+    ClienteService,
+    ReciboService
   ],
   bootstrap: [AppComponent]
 })

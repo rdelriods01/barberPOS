@@ -1,4 +1,4 @@
-<div *ngIf="user" >
+<div *ngIf="user" class="all" >
     <mat-toolbar class="tb">
         <mat-toolbar-row>
             <!-- boton toggle sidenav -->
@@ -32,6 +32,13 @@
                 <li>
                     <a [routerLink]="['/pys']">
                         <mat-icon class="icon">ballot</mat-icon>Productos y Servicios</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/tickets']">
+                        <mat-icon class="icon">receipt</mat-icon>
+                        <span *ngIf="user.role=='user'"  >Tickets Recientes</span>
+                        <span *ngIf="user.role=='admin'"  >Tickets</span>
+                    </a>
                 </li>
                 <span class="spacer"></span>
                 <li *ngIf="user.role=='admin'">

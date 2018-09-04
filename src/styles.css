@@ -8,3 +8,9 @@ body {
 * {
     font-family: Product Sans;
 }
+.mat-dialog-container{
+    border-radius: 20px !important;
+    padding: 0.2em !important;
+    background-color: lightgray !important;
+}
+

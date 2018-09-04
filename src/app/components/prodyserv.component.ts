@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from "rxjs";
 
 import { ServicioService } from '../services/servicios.service';
 import { ProductoService } from '../services/productos.service';
@@ -18,6 +21,8 @@ import { ProductoService } from '../services/productos.service';
   })
 export class ProdYServComponent {
 
+  uploadPercent:Observable<number>;
+
   // Variables Servicios
   showNewServ=false;
   descripcionS;
@@ -25,27 +30,30 @@ export class ProdYServComponent {
   displayedColumnsS: string[] = ['descripcion', 'precio', 'acciones'];
   dataSourceS = new MatTableDataSource();
   @ViewChild(MatPaginator) paginatorS: MatPaginator;
-  @ViewChild(MatSort) sortS: MatSort;  
+  @ViewChild(MatSort) sortS: MatSort;
+  servicios;
   // Variables Productos
   showNewProd=false;
   skuP;
   nombreP;
   precioP;
-  displayedColumnsP: string[] = ['sku', 'nombre','precio','acciones'];
+  displayedColumnsP: string[] = ['sku', 'nombre','precio', 'foto','acciones'];
   dataSourceP = new MatTableDataSource();
   @ViewChild('paginatorP', {read:MatPaginator}) paginatorP: MatPaginator;
   @ViewChild('sortProductos', {read: MatSort}) sortP: MatSort;
-  // @ViewChild(MatPaginator) paginatorP: MatPaginator;
-  // @ViewChild(MatSort) sortP: MatSort;
+  productos;
 
   constructor( public _serviciosS:ServicioService,
-              public _productosS: ProductoService){
+              public _productosS: ProductoService,
+              public storage: AngularFireStorage){
     this._serviciosS.getServicios().subscribe(servs=>{
+      this.servicios=servs;
       this.dataSourceS.data=servs;
       this.dataSourceS.paginator = this.paginatorS;
       this.dataSourceS.sort = this.sortS;
     })
     this._productosS.getProductos().subscribe(prods=>{
+      this.productos=prods;
       this.dataSourceP.data=prods;
       this.dataSourceP.paginator = this.paginatorP;
       this.dataSourceP.sort= this.sortP;
@@ -74,6 +82,7 @@ export class ProdYServComponent {
     }    
   }
   eliminarProducto(n, idP){
+    console.log(idP);
     let res= confirm('Desea eliminar el producto: ' + n + '?');
     if(res==true){
       this._productosS.deleteProducto(idP);
@@ -89,7 +98,30 @@ export class ProdYServComponent {
   guardarNuevoProducto(){
     console.log('Se guardo el nuevo Producto: ' + this.nombreP + ' a un precio de $' + this.precioP );
     this._productosS.saveProducto({sku:this.skuP, nombre:this.nombreP, precio:this.precioP})
-    
   }
  
+  subirFoto(event, prod){
+    prod.showProgressBar=true;
+    const file = event.target.files[0];
+    const filePath = 'PIC-'+prod.uid;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath,file);
+    // observe percentage changes
+    this.uploadPercent = task.percentageChanges();
+    // download url
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url=>{
+          prod.photourl = url;
+          prod.showProgressBar=false;
+          delete prod.showProgressBar;
+          this._productosS.updateProducto(prod);
+        })
+       })
+   )
+  // .subscribe(url=>{
+  //       console.log(url);
+  //   })
+  }
+
 }

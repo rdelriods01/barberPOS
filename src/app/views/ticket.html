@@ -1,0 +1,72 @@
+<mat-card class="ticket">
+    <div class="logo">
+        <img src="../../assets/logo.png" alt="logo">
+    </div>
+    <div class="misDatos">
+        <span><strong>Barber Shop</strong></span><br>
+        <span>BSXX830507L23</span><br>
+        <span>Calzada del Valle 169 Pte L5</span><br>
+        <span>Col. del Valle C.P. 66020</span><br>
+        <span>San Pedro Garza García, N.L.</span><br>
+        <span>Tel. 8378 1111 / 8676 2222</span><br>
+        <span>www.barbershopmonterrey.com.mx</span>
+    </div>
+    <div class="datosSuperior">
+        <span><strong>Fecha:</strong> {{recibo.fecha | date:"dd-MM-yyyy HH:mm"}} </span><br>
+        <span><strong>Folio:</strong> {{recibo.folio}} </span>
+        <br><br>
+        <span><strong>Le atendió:</strong> {{recibo.barber}} </span>
+        <br>
+    </div>
+    <div class="datosCliente">
+        <span>{{recibo.cliente}} </span>        
+    </div>
+    <div class="gridElements">
+        <div class="headers"  >
+            <span><strong>Cant.</strong></span> 
+            <span><strong>Desc.</strong></span>
+            <span><strong>Unit.</strong></span>
+            <span><strong>Total</strong></span>
+        </div>
+        <div *ngFor="let el of recibo.elements" class="carrito" >
+            <span>{{el.cant}} </span>
+            <span>{{el.nombre}}</span>
+            <span>${{el.precio}} </span>
+            <span><strong>${{el.total}} </strong></span>
+        </div>
+    </div>
+    <div class="datosInferior">
+        <span>Articulos: <strong>{{recibo.articulos}} </strong> </span>
+        <div></div>
+        <span>Sub-total:</span>
+        <strong>${{recibo.subtotal}} </strong>
+        <span>I.V.A.:</span>
+        <strong>${{recibo.iva}} </strong>
+        <span class="total">TOTAL:</span>
+        <strong class="total">${{recibo.total}} </strong>
+    </div>
+    <div class="pago">
+        <p>Forma de Pago</p>
+        <div *ngIf="recibo.formadepago=='tarjeta'" class="tarjeta">
+            <div *ngIf="recibo.tipodetarjeta=='visamastercard'">
+                <span> Visa / MasterCard</span>
+                <br>
+                <span> XXXX-XXXX-XXXX-{{recibo.digitos}} </span> 
+            </div>
+            <div *ngIf="recibo.tipodetarjeta=='amex'">
+                <span> AMEX </span>
+                <br>
+                <span> XXXX-XXXXXX-X{{recibo.digitos}} </span>
+            </div>
+            <span>Autorización: {{recibo.autorizacion}} </span>
+        </div>
+        <div *ngIf="recibo.formadepago=='efectivo'" class="efectivo">
+            <span> Efectivo: ${{recibo.efectivo}}</span>
+            <br>
+            <span>Cambio: ${{recibo.cambio}}</span>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Gracias por su preferencia!</p>
+    </div>
+</mat-card>

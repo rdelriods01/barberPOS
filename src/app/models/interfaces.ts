@@ -25,6 +25,7 @@ export interface IProducto{
 
 export interface IRecibo{
     uid?:string;
+    folio:string;
     fecha:Date;
     barber:string;
     elements:any;
@@ -32,4 +33,21 @@ export interface IRecibo{
     subtotal:string;
     iva:string;
     total:string;
+    cliente:string;
+    clienteid:string;
+    formadepago:string;
+    efectivo?:string;
+    cambio?:string;
+    tipodetarjeta?:string;
+    digitos?:string;
+    autorizacion?:string;
+}
+
+export interface ICliente{
+    uid?:string;
+    nombre:string;
+    apellido:string;
+    telefono:string;
+    correo?:string;
+    categoria?:string;
 }
