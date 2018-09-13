@@ -9,7 +9,7 @@
                 </div>
                 <div class="listBody">
                     <div class="servList">
-                        <p *ngFor="let serv of servicios" (panright)="moveItem($event, serv, 'servicio')" (panend)="sendToTicket(serv,'servicio')" (click)="sendToTicket(serv,'servicio')" [style.transform]="serv.panstyle" [style.transition]="serv.panreturn"> <span> {{serv.descripcion}} </span>   <span>  ${{serv.precio}} </span> </p>
+                        <p *ngFor="let serv of servicios" (panright)="moveItem($event, serv, 'servicio')" (panend)="sendToTicket(serv,'servicio')" [style.transform]="serv.panstyle" [style.transition]="serv.panreturn"> <span> {{serv.descripcion}} </span>   <span>  ${{serv.precio}} </span> </p>
                     </div>
                 </div>
             </div>

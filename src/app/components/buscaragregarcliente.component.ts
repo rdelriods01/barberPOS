@@ -19,7 +19,8 @@ export class BuscarAgregarClienteComponent {
   heightNewForm='0';
   opacityNewCForm='0';
   transitionNewForm='';
-
+  showNewCliente;
+  
   constructor(
     public dialogRef: MatDialogRef<BuscarAgregarClienteComponent>,
     // @Inject(MAT_DIALOG_DATA) public cliente:ICliente,

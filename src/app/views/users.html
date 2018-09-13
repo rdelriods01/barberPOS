@@ -22,4 +22,29 @@
             <button mat-raised-button type="submit" [disabled]="!formUser.valid">Crear nuevo usuario</button>
         </mat-card>
     </form>
+
+        <table>
+            <thead>
+                <tr class="rowHeader">
+                    <th>No.</th>
+                    <th>Barber</th>
+                    <th>e-mail</th>
+                    <th>PIN</th>
+                    <th>Fecha de creación</th>
+                    <th>Inicio de sesion</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let barber of barbers; index as i" class="rowData" >
+                    <td>{{i+1}} </td>
+                    <td > {{barber.displayName}} </td>
+                    <td > {{barber.email}}</td>
+                    <td > {{barber.password}}</td>
+                    <td > {{barber.created | date:'dd/MM/yyyy H:mm'}}</td>
+                    <td > {{barber.lastlogin | date:'dd/MM/yyyy HH:mm'}}</td>
+                    <button class="deleteBtn" color="warn" mat-raised-button (click)=deleteUser(barber) ><mat-icon>delete</mat-icon></button> 
+                </tr> 
+            </tbody>
+        </table>
 </div>

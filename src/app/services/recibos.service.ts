@@ -21,16 +21,16 @@ export class ReciboService{
         this.afs.collection('recibos').doc(recibo.uid).set(recibo);
     }
     // Leer todos los recibos (90 dias)
-    getRecibos(){
-        let fechalimite= new Date(this.getDias(90));
+    getRecibos(dias:Number){
+        let fechalimite= new Date(this.getDias(dias));
         let fechalimiteTS=fechalimite.getTime();
         return this.recibos=this.afs.collection('recibos', ref => ref.where('fecha', '>=', fechalimiteTS).orderBy('fecha', "desc")).valueChanges();
     }
     // Leer recibos recientes (3 dias)
-    getRecibosRecientes(){
+    getRecibosRecientes(barber){
         let fechalimite= new Date(this.getDias(3));
         let fechalimiteTS=fechalimite.getTime();
-        return this.recibos=this.afs.collection('recibos', ref => ref.where('fecha', '>=', fechalimiteTS).orderBy('fecha', "desc")).valueChanges();
+        return this.recibos=this.afs.collection('recibos', ref => ref.where('fecha', '>=', fechalimiteTS).where('barber','==',barber).orderBy('fecha', "desc")).valueChanges();
     }
     // Leer un recibo en específico   
     getUnRecibo(uidR){
@@ -39,6 +39,9 @@ export class ReciboService{
     // Leer todos los recibos
     getTodosRecibos(){
         return this.recibos=this.afs.collection('recibos', ref => ref.orderBy('fecha', "desc")).valueChanges();
+    }
+    getRangoRecibos(inicio, fin){
+        return this.recibos=this.afs.collection('recibos', ref => ref.where('fecha', '>=', inicio).where('fecha', '<=', fin).orderBy('fecha', "desc")).valueChanges();
     }
     // Actualizar Recibo
     updateRecibo(rec:IRecibo){
@@ -54,11 +57,7 @@ export class ReciboService{
     getDias(v){
         var d=new Date();
         d.setDate(d.getDate() - v);
-        let miFecha:any[]=[];
-        miFecha[0]=d.getFullYear();
-        miFecha[1]=d.getMonth()+1;
-        miFecha[2]=d.getDate();
-        let tresDias=miFecha[0]+'-'+miFecha[1]+'-'+miFecha[2];
-        return tresDias;    
+        console.log(d);
+        return d; 
     }
 }

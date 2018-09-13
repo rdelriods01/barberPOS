@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { ReciboService } from "../services/recibos.service";
 
 import { TicketComponent } from "../components/ticket.component";
+import {LayoutComponent  } from "../components/layout.component";
 
 import { IRecibo } from '../models/interfaces';
 
@@ -18,7 +19,7 @@ export class RecibosComponent {
      // Variables Recibos
     descripcionT;
     precioT;
-    displayedColumnsT: string[] = ['fecha', 'folio', 'cliente', 'articulos', 'total', 'acciones'];
+    displayedColumnsT;
     dataSourceT = new MatTableDataSource();
     @ViewChild(MatPaginator) paginatorT: MatPaginator;
     @ViewChild(MatSort) sortT: MatSort;  
@@ -27,28 +28,25 @@ export class RecibosComponent {
 
     constructor( public _recibosS:ReciboService,
                  public dialog: MatDialog,
-                 public auth: AuthService){
- 
-        this.auth.user.subscribe(us=>{
-            if(us){
-                if(us.role=='user'){
-                    this._recibosS.getRecibosRecientes().subscribe(tickets=>{
-                        console.log(tickets);
-                        this.dataSourceT.data=tickets;
-                        this.dataSourceT.paginator = this.paginatorT;
-                        this.dataSourceT.sort = this.sortT;
-                    })
-                }else{
-                    this.showVerTodos=true;
-                    this._recibosS.getRecibos().subscribe(tickets=>{
-                        console.log(tickets);
-                        this.dataSourceT.data=tickets;
-                        this.dataSourceT.paginator = this.paginatorT;
-                        this.dataSourceT.sort = this.sortT;
-                    })
-                }
-            }
-        })
+                 public auth: AuthService, 
+                public _layoutC: LayoutComponent){
+                
+        if(this._layoutC.user.role=='user'){
+            this.displayedColumnsT = ['fecha', 'folio', 'cliente', 'articulos', 'total', 'acciones'];
+            this._recibosS.getRecibosRecientes(this._layoutC.user.displayName).subscribe(tickets=>{
+                this.dataSourceT.data=tickets;
+                this.dataSourceT.paginator = this.paginatorT;
+                this.dataSourceT.sort = this.sortT;
+            })
+        }else{
+            this.showVerTodos=true;
+            this.displayedColumnsT = ['fecha', 'folio', 'cliente', 'articulos', 'total', 'barber','acciones'];
+            this._recibosS.getRecibos(90).subscribe(tickets=>{
+                this.dataSourceT.data=tickets;
+                this.dataSourceT.paginator = this.paginatorT;
+                this.dataSourceT.sort = this.sortT;
+            })
+        }
     }
 
     filtrarT(filterValue: string) {
@@ -59,14 +57,12 @@ export class RecibosComponent {
     }
 
     verTicket(tkt){
-        console.log(tkt);
         const dialogRef = this.dialog.open(TicketComponent)
         dialogRef.componentInstance.recibo=tkt;
     }
 
     verTodos(){
         this._recibosS.getTodosRecibos().subscribe(tickets=>{
-            console.log(tickets);
             this.dataSourceT.data=tickets;
             this.dataSourceT.paginator = this.paginatorT;
             this.dataSourceT.sort = this.sortT;

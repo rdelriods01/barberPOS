@@ -48,8 +48,10 @@ export class AuthService {
             displayName: data.user.displayName,
             photoURL: data.user.photoURL,
             password:us.password,
-            role: us.rol
-          }       
+            role: us.rol,
+            lastlogin: data.user.metadata.lastSignInTime,
+            created: data.user.metadata.creationTime
+          };       
           this.afs.doc(`users/${data.user.uid}`).set(miUser); 
         })
       })
@@ -63,5 +65,18 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
         this.router.navigate(['/login']);
     });
+  }
+
+  getUsers(){
+    return this.afs.collection('users').valueChanges();
+  }
+  getBarbers(){
+    return this.afs.collection('users', ref => ref.where('role', '==', 'user')).valueChanges();
+  }
+  // Eliminar usuario
+  deleteUser(uidU){
+    this.afs.collection('users').doc(uidU).delete();
+    // this.afAuth.auth
+    alert('Usuario eliminado!');
   }
 }

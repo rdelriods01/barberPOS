@@ -87,3 +87,8 @@ td, th {
     margin-left: 1em;
     min-width: 5vw;
 }
+@media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) { 
+    .all {
+        zoom: 69%;
+    }
+}

@@ -5,6 +5,8 @@ export interface IUser {
     displayName: string;
     photoURL?: string;
     role:string;
+    lastlogin?:string;
+    created?:string;
 }
 
 export interface IServicio{

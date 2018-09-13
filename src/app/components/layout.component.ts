@@ -13,10 +13,16 @@ export class LayoutComponent {
   showSideNav:Boolean=false;
   user;
  
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService,
+               public router: Router) {
     if(window.innerWidth<769){ this.showSideNav=false }
     this.auth.user.subscribe(us=>{
-      this.user=us;
+      if(us){
+        this.user=us;
+        if(us.role=='admin'){
+          this.router.navigate(['/db']);
+        }
+      }
     })
   }
 }

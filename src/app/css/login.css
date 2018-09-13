@@ -1,4 +1,4 @@
-.bg {
+.all {
     position: absolute;
     top: 0;
     left: 0;
@@ -7,8 +7,20 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: #fafafa;
+    background: rgba(0,0,0,0.6);
     zoom: 80%;
+}
+#bg{
+    background-image: url('../../assets/walls/1.jpg');
+    transition: background-image 1s ease-in-out;
+    height: 100vh; 
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100vw 100vh;
+    position: absolute;
+    opacity: 0.5;
+    background-color: #313131;
 }
 .logo{
     margin: 0 auto;
@@ -16,28 +28,37 @@
 .logo img{
     height: 10em;
 }
+.tabsGroup{
+    margin: 0 auto;
+}
+
 .loginCard {
     margin: 0 auto;
     margin-top: 2em;
     width: 30em;
-    height: 25em;
-    background: rgba(255, 255, 255, 0.16);
+    min-height: 30em;
+    background-color: rgba(255,255,255,0.5);
     text-align: center;
-    border-top: 5px solid primary;
+    display: grid;
+}
+form{
+    margin: auto !important;
 }
 .textSup {
     color: #444;
-    margin: 2em 0;
+}
+.textSup h1{
+    margin: 0;
 }
 .inputs {
     width: 24em;
-    margin: auto;
+    margin: 3em 0;
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
 
 .icons {
-    color: #9e9e9e;
+    color: #444444;
     align-self: center;
     margin: 0;
 }
@@ -47,11 +68,33 @@
     border-radius: 8px;
     font-size: 1.1em;
     color: #fafafa;
-    margin-top: 2em;
 }
-@media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 2) {
     .loginCard {
         zoom: 95%;
-        max-width: fit-content;
     }
+    .all{
+        zoom: 50%;
+        /* height: 100vh;  */
+    }
+}
+
+.num1-9{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.num1-9 button{
+    border: 2px solid #0288d1;
+    color: #c1c1c1;
+    min-height: 3em;
+    font-weight: bolder;
+    font-size: 2em;
+    background-color: #313131;
+    border-radius: 8px;
+    white-space: normal;
+    line-height: normal;
+}
+
+::ng-deep .mat-tab-header{
+    background-color: rgba(255,255,255,0.2) !important;
 }

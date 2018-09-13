@@ -1,9 +1,10 @@
 {
   "name": "barberPOS",
   "short_name": "barberPOS",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#444444",
+  "background_color": "#444444",
   "display": "standalone",
+  "orientation": "landscape",
   "scope": "/",
   "start_url": "/",
   "icons": [

@@ -3,8 +3,8 @@
 }
 .mat-card{
     border-radius: 20px !important;
-    min-height: 51vh !important;
-    max-height: 70vh !important;
+    min-height: 39vh !important;
+    max-height: 48vh !important;
     overflow: auto !important;
     background-color: #212121 !important;
     color: #796600;

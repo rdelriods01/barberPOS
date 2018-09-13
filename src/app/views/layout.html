@@ -10,7 +10,7 @@
             <!-- separador -->
             <span class="spacer"></span>
             <!-- usuario -->
-            <div *ngIf="user" class="usuario">
+            <div *ngIf="user" class="usuario" (click)="auth.logout()">
                 <img *ngIf="user.photoURL" mat-card-image src={{user.photoURL}} alt="PP">
                 <img *ngIf="!user.photoURL" mat-card-image src="../../assets/pp.png" alt="PP">
                 <p> {{user.displayName}} </p>
@@ -29,7 +29,7 @@
                     <a [routerLink]="['/']">
                         <mat-icon class="icon">store</mat-icon>Venta</a>
                 </li>
-                <li>
+                <li *ngIf="user.role=='admin'">
                     <a [routerLink]="['/pys']">
                         <mat-icon class="icon">ballot</mat-icon>Productos y Servicios</a>
                 </li>

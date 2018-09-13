@@ -14,8 +14,13 @@ export class UsersComponent {
     email;
     password;
     rol;
- 
-  constructor(public _authService: AuthService) {}
+    
+    barbers;
+  constructor(public _authService: AuthService) {
+      this._authService.getBarbers().subscribe(barbers=>{
+          this.barbers=barbers;
+      })
+  }
  
   nuevoUsuario(userData){
       if(userData.valid){
@@ -24,4 +29,14 @@ export class UsersComponent {
       }
   }
  
+  deleteUser(user){
+    let res= confirm('Seguro que desea eliminar a: ' + user.displayName + '?');
+    if(res==true){
+      this._authService.deleteUser(user.uid)
+        console.log(user.uid);        
+    }else{
+      alert('Usuario NO eliminado');
+    } 
+  }
+
 }

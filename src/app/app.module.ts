@@ -30,7 +30,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from "@angular/material";
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 // Servicios ==========================
 import { AuthService } from './services/auth.service';
@@ -96,14 +98,15 @@ const routes: Routes = [
     MatToolbarModule, MatButtonModule, MatIconModule, MatCardModule, MatInputModule,
     MatFormFieldModule, MatSidenavModule, MatSelectModule, MatButtonToggleModule,
     MatTabsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule,
-    MatRadioModule, MatProgressBarModule
+    MatRadioModule, MatProgressBarModule, MatDatepickerModule, MatNativeDateModule
   ],
   providers: [
     AuthService,
     ServicioService,
     ProductoService,
     ClienteService,
-    ReciboService
+    ReciboService,
+    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
   ],
   bootstrap: [AppComponent]
 })

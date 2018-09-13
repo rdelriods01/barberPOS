@@ -39,7 +39,11 @@ export class VentaComponent {
         this.cliente.uid='XAXX010101000';
         //  Iniciar Recibo
         this._authS.user.subscribe(us=>{
-            this.recibo.barber=us.displayName;           
+            if(us){
+                this.recibo.barber=us.displayName;           
+            }else{
+                this.recibo.barber='';
+            }
         })
         this.recibo.elements=[];
         this.recibo.articulos=0;
@@ -84,6 +88,7 @@ export class VentaComponent {
         if(flagYaExiste==false){
             el.cant=1;
         }
+        el.tipo=tipo;
         el.total=Number(el.precio)*el.cant;
         this.recibo.elements.push(el);
         this.recibo.articulos=0;

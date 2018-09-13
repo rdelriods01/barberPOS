@@ -1,1 +1,102 @@
-<h3>Hello World! from Dashboard</h3>
+<div class="all">
+    <div class="sup">
+        <mat-card>
+            <button mat-raised-button color="primary" (click)="setMes()" class="updtBtn" > Mes </button>
+            <button mat-raised-button color="primary" (click)="setHoy()" class="updtBtn" > Hoy </button>
+
+            <mat-form-field class="fechaSelect" >
+                <input matInput [matDatepicker]="fInicio" placeholder="Fecha inicial" (click)="fInicio.open()" (dateChange)="sendDateI($event.value)" [value]="fechaini" >
+                <mat-datepicker #fInicio></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="fechaSelect">
+                <input matInput [matDatepicker]="fFin" placeholder="Fecha final" (click)="fFin.open()" (dateChange)="sendDateF($event.value)" [value]=fechafin >
+                <mat-datepicker #fFin></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" (click)="setRango()" class="updtBtn" > <mat-icon>update</mat-icon> </button>
+        </mat-card>
+    </div>
+    <div class="mid">
+        <mat-card>
+            <mat-tab-group mat-stretch-tabs class="tabsGroup">
+                <mat-tab label="Visión General">
+                    <div class="tabCharts">
+                        <div class="arribaChart">
+                            <p>Transacciones Realizadas: <strong> {{ventasRealizadas}}</strong></p>
+                            <p>Total de Ventas: <strong>${{totalDeVentas}}</strong></p>  
+                            <button mat-raised-button (click)="changeChart()" > Cambiar gráfico </button>
+             
+                        </div>
+                        <div *ngIf="barChart" id="barCanvasCont" class="barChart">
+                            <canvas id="barCanvas">{{ barChart }}</canvas>
+                        </div>
+                        <div class="pieChart" [style.height]="heightPie" [style.opacity]="opacityPie" >
+                            <div style="margin:0 1em">
+                                <table [style.height]="heightPie">
+                                    <thead>
+                                        <tr class="rowHeaderPie">
+                                            <th>Barber</th>
+                                            <th>Transacciones</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let bar of chartBarbers; index as i" class="rowDataPie" >
+                                            <td> {{bar}} </td>
+                                            <td> {{arrArtsBarbers[i]}} </td>
+                                            <td> ${{arrVentasBarbers[i]}} </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div  style="margin:auto" id="pieCanvasCont" *ngIf="pieChart" >
+                                <canvas id="pieCanvas">{{ pieChart }}</canvas>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Transacciones">
+                    <table>
+                        <thead>
+                            <tr class="rowHeader" [ngStyle]="{'grid-template-columns' : columnsOps}" >
+                                <th>Fecha</th>
+                                <th>Folio</th>
+                                <th *ngIf="showBarber" >Barber</th>
+                                <th>Cliente</th>
+                                <th>Artículos</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tkt of tickets" class="rowData" [ngStyle]="{'grid-template-columns' : columnsOps}" >
+                                <td> {{tkt.fecha | date:"dd-MM-yyy HH:mm"}} </td>
+                                <td> {{tkt.folio}} </td>
+                                <td *ngIf="showBarber" > {{tkt.barber}} </td>
+                                <td> {{tkt.cliente}} </td>
+                                <td> {{tkt.articulos}} </td>
+                                <td> {{tkt.total}} </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+        <mat-card class="barbersCard" >
+            <h2>Barbers</h2>
+            <mat-radio-group class="radio-group" (change)="setBarber($event.value)" [(ngModel)]="selectedBarber">
+                <mat-radio-button class="radio-button" *ngFor="let barb of barbers" [value]="barb">
+                    {{barb}}
+                </mat-radio-button>
+                </mat-radio-group>
+        </mat-card>
+    </div>
+    <!-- <div class="inf">
+        <mat-card>
+            <h2>Otros</h2>
+        </mat-card>
+    </div> -->
+</div>
+
+
+

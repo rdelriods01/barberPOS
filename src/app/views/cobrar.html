@@ -3,7 +3,7 @@
         <div class="left">
             <h1>Total a Pagar:</h1>
             <h3 id="total" >${{recibo.total}}</h3>
-            <div *ngIf="pagacon>0" class="gridCambio">
+            <div *ngIf="pagacon" class="gridCambio">
                 <p [style.color]="porpagarColor" >por pagar:</p><span [style.color]="porpagarColor"><strong>${{porpagar}}</strong></span>
                 <p [style.color]="cambioColor" >cambio:</p><span [style.color]="cambioColor" [style.font-size]="cambioFontSize" ><strong>${{cambio}}</strong></span>
             </div>

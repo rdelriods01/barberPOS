@@ -1,25 +1,52 @@
-<div class="bg">
+<div id="bg"></div>
+<div  class="all">
     <div class="logo">
         <img  src="../../assets/logo.png" alt="logo">
     </div>
-    <mat-card class="loginCard">
-        <form>
-            <div class="textSup">
-                <h1>Inicia Sesion</h1>
-            </div>
-            <div class="inputs">
-                    <p class="icons"><mat-icon>mail</mat-icon></p>
-                    <mat-form-field>
-                        <input matInput name="email" [(ngModel)]="email" placeholder="email.." required>
-                    </mat-form-field>
-                    <p class="icons"><mat-icon>lock</mat-icon></p>
-                    <mat-form-field>
-                        <input matInput type="password" name="pass" [(ngModel)]="pass" placeholder="pass.." required>
-                    </mat-form-field>
-            </div>
-            <div class="btnLogin">
-                <button mat-raised-button id="btn-login" color="primary" (click)="login(email,pass)">Login</button>
-            </div>
-        </form>
-    </mat-card>
+
+    <mat-tab-group mat-stretch-tabs headerPosition="below" class="tabsGroup">
+        <mat-tab label="PIN"> 
+            <mat-card class="loginCard">
+                <div class="textSup">
+                    <h1>Ingrese PIN</h1>
+                </div>
+                <div class="num1-9">
+                    <button mat-stroked-button (click)="sendNum('1')" > 1 </button>
+                    <button mat-stroked-button (click)="sendNum('2')" > 2 </button>
+                    <button mat-stroked-button (click)="sendNum('3')" > 3 </button>
+                    <button mat-stroked-button (click)="sendNum('4')" > 4 </button>
+                    <button mat-stroked-button (click)="sendNum('5')" > 5 </button>
+                    <button mat-stroked-button (click)="sendNum('6')" > 6 </button>
+                    <button mat-stroked-button (click)="sendNum('7')" > 7 </button>
+                    <button mat-stroked-button (click)="sendNum('8')" > 8 </button>
+                    <button mat-stroked-button (click)="sendNum('9')" > 9 </button>
+                    <div></div>
+                    <button mat-stroked-button (click)="sendNum('0')" > 0 </button>
+                    <div></div>
+                </div>
+            </mat-card>    
+        </mat-tab>
+        <mat-tab label="e-mail">
+            <mat-card class="loginCard">
+                <form>
+                    <div class="textSup">
+                        <h1>Inicia Sesion</h1>
+                    </div>
+                    <div class="inputs">
+                            <p class="icons"><mat-icon>mail</mat-icon></p>
+                            <mat-form-field>
+                                <input matInput name="email" [(ngModel)]="email" placeholder="email.." required>
+                            </mat-form-field>
+                            <p class="icons"><mat-icon>lock</mat-icon></p>
+                            <mat-form-field>
+                                <input matInput type="password" name="pass" [(ngModel)]="pass" placeholder="pass.." required>
+                            </mat-form-field>
+                    </div>
+                    <div class="btnLogin">
+                        <button mat-raised-button id="btn-login" color="primary" (click)="login(email,pass)">Login</button>
+                    </div>
+                </form>
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
 </div>
