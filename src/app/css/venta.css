@@ -7,6 +7,9 @@
     min-height: -moz-calc(100vh - 4.5em);
     min-height: -webkit-calc(100vh - 4.5em);
     min-height: calc(100vh - 4.5em);
+    height: -moz-calc(100% - 2em);
+    height: -webkit-calc(100% - 2em);
+    height: calc(100% - 2em);
 }
 mat-card{
     border-radius: 10px;
@@ -197,5 +200,11 @@ mat-button-toggle{
 @media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) { 
     .all {
         zoom: 69%;
+    }
+    .left{
+        height: 100%;
+    }
+    .listBody{
+        height: 80vh;
     }
 }
