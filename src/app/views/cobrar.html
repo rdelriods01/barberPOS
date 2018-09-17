@@ -60,13 +60,13 @@
                             <div class="digitos">
                                 <p  *ngIf="tipoDeTarjeta=='visamastercard'" >XXXX-XXXX-XXXX-</p>
                                 <p *ngIf="tipoDeTarjeta=='amex'" >XXXX-XXXXXX-X</p>
-                                <input type="text" name="digitos" [(ngModel)]="digitos" pattern="\d{4}" placeholder="1234" required>
+                                <input type="text" name="digitos" [(ngModel)]="digitos" inputmode="numeric" pattern="\d{4}" placeholder="1234" required>
                             </div>
                             <li>Realice transacción en terminal</li>
                             <p class="espacio" > <mat-icon>credit_card</mat-icon> </p>
                             <li>Ingrese número de autorización</li>
                             <p class="autorizacion">
-                                <input type="text" name="autorizacion" [(ngModel)]="autorizacion" pattern="\d{6}" placeholder="123456" required>
+                                <input type="text" name="autorizacion" [(ngModel)]="autorizacion" inputmode="numeric" pattern="\d{6}" placeholder="123456" required>
                             </p>
                         </ol>
                     </div>
