@@ -197,7 +197,7 @@ mat-button-toggle{
     background-color: #9E9E9E;
     margin: auto;
 }
-@media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) { 
+@media only screen and (max-device-width: 824px) and (-webkit-min-device-pixel-ratio: 2) { 
     .all {
         zoom: 69%;
     }

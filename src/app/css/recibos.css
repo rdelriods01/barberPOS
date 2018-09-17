@@ -24,7 +24,7 @@ table {
     min-width: 2em;
     margin: 0 0.2em;
 }
-@media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) { 
+@media only screen and (max-device-width: 824px) and (-webkit-min-device-pixel-ratio: 2) { 
     .all {
         zoom: 69%;
     }

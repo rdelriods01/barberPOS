@@ -4,7 +4,7 @@
 .mat-card{
     border-radius: 20px !important;
     min-height: 39vh !important;
-    max-height: 48vh !important;
+    /* max-height: 48vh !important; */
     overflow: auto !important;
     background-color: #212121 !important;
     color: #796600;
@@ -44,6 +44,7 @@ h1{
     margin: 0.7em auto;
     border-radius: 10px;
     display: block;
+    margin-bottom: 0;
 }
 /* RIGHT */
 .pago{

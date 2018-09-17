@@ -48,7 +48,7 @@ tbody tr{
     min-width: 4vw;
     margin: auto;
 }
-@media only screen and (max-device-width: 800px) and (-webkit-min-device-pixel-ratio: 2) { 
+@media only screen and (max-device-width: 824px) and (-webkit-min-device-pixel-ratio: 2) { 
     .all {
         zoom: 69%;
     }
