@@ -181,14 +181,10 @@ export class VentaComponent {
         const dialogRef = this.dialog.open(BuscarAgregarClienteComponent, {
             width: '200em',
         });
-      
         dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
         if(result){
             this.cliente = result;
         }
-        console.log(this.cliente);
-        
         });
     }
 

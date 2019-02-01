@@ -36,9 +36,12 @@
                 <li>
                     <a [routerLink]="['/tickets']">
                         <mat-icon class="icon">receipt</mat-icon>
-                        <span *ngIf="user.role=='user'"  >Tickets Recientes</span>
-                        <span *ngIf="user.role=='admin'"  >Tickets</span>
+                        <span >Tickets</span>
                     </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/clientes']">
+                        <mat-icon class="icon">contacts</mat-icon>Clientes</a>
                 </li>
                 <span class="spacer"></span>
                 <li *ngIf="user.role=='admin'">

@@ -48,7 +48,7 @@ export class BuscarAgregarClienteComponent {
   agregarCliente(){
     this.heightNewForm='0';
     this.opacityNewCForm='0';
-    this.transitionNewForm="opacity 0.5s, height 1s"
+    this.transitionNewForm="opacity 0.5s, height 1s";
     this._clienteService.saveCliente(this.cliente);
   }
 
@@ -58,7 +58,7 @@ export class BuscarAgregarClienteComponent {
     this.clientes=this.filterAllProperties(this.backupClientes,val);
     if(val==''){this.showTable=false}
 }
-filterAllProperties(array,value){
+  filterAllProperties(array,value){
     var filtrado = [];
     for (var i=0; i<array.length;i++){
       var obj=JSON.stringify(array[i]);
@@ -67,15 +67,6 @@ filterAllProperties(array,value){
       }
     }
     return filtrado;
-  }
-
-
-  onNoClick(){
-    this.cliente.nombre='Público en General';
-    this.cliente.apellido='';
-    this.cliente.telefono='';
-    this.cliente.correo='';
-    this.dialogRef.close(this.cliente);
   }
 
 }

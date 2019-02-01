@@ -119,7 +119,6 @@ export class DashboardComponent {
   }
   
   calcVentas(tkts){
-    console.log(tkts);
     this.totalDeVentas=0;
     this.chartFechas=[];
     this.chartVentas=[];
@@ -227,9 +226,7 @@ export class DashboardComponent {
           }
         }
       }
-    });
-    console.log(this.barChart);
-    
+    });   
     this.pieChart = new Chart('pieCanvas', {
       type: 'doughnut',
       data: {

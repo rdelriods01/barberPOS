@@ -1,6 +1,7 @@
 <div class="all">
     <div class="header">
-        <h3>Tickets</h3>
+        <h3 *ngIf="_layoutC.user.role=='admin'">Tickets</h3>
+        <h3 *ngIf="_layoutC.user.role=='user'">Tickets Recientes</h3>
     </div>
     <mat-card>
         <div class="tabla">

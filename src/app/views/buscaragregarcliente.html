@@ -18,7 +18,7 @@
                     <input matInput name="apellido" [(ngModel)]="cliente.apellido" placeholder="Apellido" required >
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="tel" pattern="\d{4}\-\d{4}" name="telefono" [(ngModel)]="cliente.telefono" placeholder="Teléfono 1234-5678" required>
+                    <input matInput type="tel" pattern="[0-9]{10}" name="telefono" [(ngModel)]="cliente.telefono" placeholder="Teléfono 1234-5678" required>
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput name="correo" [(ngModel)]="cliente.correo" placeholder="E-mail" type="email">

@@ -47,6 +47,7 @@ import { LoginComponent } from './components/login.component';
 import { LayoutComponent } from './components/layout.component';
 import { DashboardComponent } from './components/dashboard.component';
 import { UsersComponent } from './components/users.component';
+import { ClientesComponent } from './components/clientes.component';
 import { VentaComponent } from './components/venta.component';
 import { ProdYServComponent } from './components/prodyserv.component';
 import { BuscarAgregarClienteComponent } from './components/buscaragregarcliente.component';
@@ -62,6 +63,7 @@ const routes: Routes = [
     { path:'pys', component: ProdYServComponent},
     { path:'tickets', component: RecibosComponent},
     { path:'users', component: UsersComponent},
+    { path:'clientes', component: ClientesComponent},
   ]},
   { path:'login', component: LoginComponent},
   { path:'**', redirectTo: '', pathMatch: 'full'}
@@ -74,6 +76,7 @@ const routes: Routes = [
     LayoutComponent,
     DashboardComponent,
     UsersComponent,
+    ClientesComponent,
     VentaComponent,
     ProdYServComponent,
     BuscarAgregarClienteComponent,

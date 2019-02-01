@@ -1,6 +1,6 @@
 .ticket{
     width: 30vw;
-    /* max-height: 65vh; */
+    height: 80vh;
     overflow-x: hidden;
     overflow-y: scroll;
     border-radius: 20px;

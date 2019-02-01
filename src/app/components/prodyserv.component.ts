@@ -12,17 +12,20 @@ import { ProductoService } from '../services/productos.service';
   selector: 'prodyservC',
   templateUrl: '../views/prodyserv.html',
   styleUrls: ['../css/prodyserv.css'],
-  animations: [
-    trigger('animationNewServ', [      
-      transition(':enter', [style({ height: '0', opacity:'0', margin:'0' }), animate(400) ]),
-      transition(':leave', [animate(400, style({ height: '0', opacity:'0', margin:'0' })) ]),
-      state('*', style({ height: '*', opacity:'1', margin:'*' })), ])
-    ]
+  // animations: [
+  //   trigger('animationNewServ', [      
+  //     transition(':enter', [style({ height: '0', opacity:'0', margin:'0' }), animate(400) ]),
+  //     transition(':leave', [animate(400, style({ height: '0', opacity:'0', margin:'0' })) ]),
+  //     state('*', style({ height: '*', opacity:'1', margin:'*' })), ])
+  //   ]
   })
 export class ProdYServComponent {
 
   uploadPercent:Observable<number>;
-
+  
+  heightNewForm='0';
+  opacityNewCForm='0';
+  transitionNewForm='';
   // Variables Servicios
   showNewServ=false;
   descripcionS;
@@ -82,7 +85,6 @@ export class ProdYServComponent {
     }    
   }
   eliminarProducto(n, idP){
-    console.log(idP);
     let res= confirm('Desea eliminar el producto: ' + n + '?');
     if(res==true){
       this._productosS.deleteProducto(idP);
@@ -94,10 +96,12 @@ export class ProdYServComponent {
   guardarNuevoServicio(){
     console.log('Se guardo el nuevo Servicio: ' + this.descripcionS + ' a un precio de $' + this.precioS );
     this._serviciosS.saveServicio({descripcion:this.descripcionS, precio:this.precioS});
+    this.hideForm();
   }
   guardarNuevoProducto(){
     console.log('Se guardo el nuevo Producto: ' + this.nombreP + ' a un precio de $' + this.precioP );
     this._productosS.saveProducto({sku:this.skuP, nombre:this.nombreP, precio:this.precioP})
+    this.hideForm();
   }
  
   subirFoto(event, prod){
@@ -124,4 +128,18 @@ export class ProdYServComponent {
   //   })
   }
 
+  sendTab(ev){
+    console.log(ev);
+  }
+  showForm(){
+    this.heightNewForm='4em';
+    this.opacityNewCForm='1';
+    this.transitionNewForm="all 1s";
+  }
+
+  hideForm(){
+    this.heightNewForm='0';
+    this.opacityNewCForm='0';
+    this.transitionNewForm="opacity 0.5s, height 1s";
+  }
 }

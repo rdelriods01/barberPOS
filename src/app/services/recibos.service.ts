@@ -53,11 +53,9 @@ export class ReciboService{
         alert('Recibo eliminado!');
     }
 
-
     getDias(v){
         var d=new Date();
         d.setDate(d.getDate() - v);
-        console.log(d);
         return d; 
     }
 }

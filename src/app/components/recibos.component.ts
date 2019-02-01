@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 
-import { AuthService } from '../services/auth.service';
 import { ReciboService } from "../services/recibos.service";
 
 import { TicketComponent } from "../components/ticket.component";
@@ -28,7 +27,6 @@ export class RecibosComponent {
 
     constructor( public _recibosS:ReciboService,
                  public dialog: MatDialog,
-                 public auth: AuthService, 
                 public _layoutC: LayoutComponent){
                 
         if(this._layoutC.user.role=='user'){

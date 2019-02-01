@@ -2,23 +2,25 @@
     <div class="header">
         <h3>Productos y Servicios</h3>
     </div>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="showNewServ=false; showNewProd=false; hideForm()"  >
         <!-- SERVICIOS=============================================================== -->
         <mat-tab label="Servicios"> 
             <mat-card>
                 <form #formNewServ="ngForm">
                     <div class="sup">
-                        <button *ngIf="!showNewServ" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewServ=!showNewServ">Agregar Servicio</button>
-                        <button *ngIf="showNewServ" color="accent" mat-raised-button (click)="showNewServ=!showNewServ"> <mat-icon>arrow_back</mat-icon> </button>
+                        <button *ngIf="!showNewServ" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewServ=!showNewServ; showForm()">Agregar Servicio</button>
+                        <button *ngIf="showNewServ" color="accent" mat-raised-button (click)="showNewServ=!showNewServ; hideForm()"> <mat-icon>arrow_back</mat-icon> </button>
                         <button *ngIf="showNewServ" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewServ=!showNewServ; guardarNuevoServicio()" [disabled]="!formNewServ.form.valid">Guardar</button>
                     </div>
-                    <div *ngIf="showNewServ" [@animationNewServ]="showNewServ"  class="newServForm">
-                        <mat-form-field>
-                            <input matInput name="descripcionS" [(ngModel)]="descripcionS" placeholder="Descripción del Servicio..." required>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioS" [(ngModel)]="precioS" placeholder="Precio... (ej. 199.99)" required>
-                        </mat-form-field>                    
+                    <div  [style.height]="heightNewForm" [style.transition]="transitionNewForm" [style.opacity]="opacityNewCForm">
+                        <div class="newServForm">
+                            <mat-form-field>
+                                <input matInput name="descripcionS" [(ngModel)]="descripcionS" placeholder="Descripción del Servicio..." required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput type="text" pattern="\d{1,3}(\.\d{2})?" name="precioS" [(ngModel)]="precioS" placeholder="Precio... (ej. 199.99)" required>
+                            </mat-form-field>                    
+                        </div>
                     </div>
                 </form>
                 <div class="tabla">
@@ -66,11 +68,11 @@
             <mat-card>
                 <form #formNewProd="ngForm">
                     <div class="sup">
-                        <button *ngIf="!showNewProd" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewProd=!showNewProd">Agregar Producto</button>
-                        <button *ngIf="showNewProd" color="accent" mat-raised-button (click)="showNewProd=!showNewProd"> <mat-icon>arrow_back</mat-icon> </button>
+                        <button *ngIf="!showNewProd" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewProd=!showNewProd; showForm()">Agregar Producto</button>
+                        <button *ngIf="showNewProd" color="accent" mat-raised-button (click)="showNewProd=!showNewProd; hideForm()"> <mat-icon>arrow_back</mat-icon> </button>
                         <button *ngIf="showNewProd" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewProd=!showNewProd; guardarNuevoProducto()" [disabled]="!formNewProd.form.valid">Guardar</button>
                     </div>
-                    <div *ngIf="showNewProd" [@animationNewServ]="showNewProd" >
+                    <div [style.height]="heightNewForm" [style.transition]="transitionNewForm" [style.opacity]="opacityNewCForm" >
                         <div class="newProdForm">
                             <mat-form-field>
                                 <input matInput name="skuP" [(ngModel)]="skuP" placeholder="SKU del Producto..." required>

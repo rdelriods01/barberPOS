@@ -1,11 +1,15 @@
 .all{
     padding: 1em;
+    padding-top: 0;
     background-color: #f9f9f9;
     min-height: -moz-calc(100vh - 4.5em);
     min-height: -webkit-calc(100vh - 4.5em);
     min-height: calc(100vh - 4.5em);
     display: grid;
-    grid-template-rows: 10vh auto;
+    grid-template-rows: 8vh auto;
+}
+.header{
+    text-align: center;
 }
 .sup{
     text-align: end;
@@ -42,20 +46,14 @@ td, th {
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 2em;
-    margin: 1em;
-    padding: 2em;
-    border: 3px dashed goldenrod;
-    border-radius: 8px;
+    padding: 1em 2em 0 2em;
 }
 /* PRODUCTOS */
 .newProdForm{
     display: grid;
     grid-template-columns: 2fr 2fr 1fr;
     grid-gap: 2em;
-    margin: 1em;
-    padding: 2em;
-    border: 3px dashed goldenrod;
-    border-radius: 8px;
+    padding: 1em 2em 0 2em;
 }
   /* AGREGAR FOTOS */
 
