@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from "rxjs";
 
@@ -13,21 +13,21 @@ import { ProductoService } from '../services/productos.service';
   templateUrl: '../views/prodyserv.html',
   styleUrls: ['../css/prodyserv.css'],
   // animations: [
-  //   trigger('animationNewServ', [      
+  //   trigger('animationNewServ', [
   //     transition(':enter', [style({ height: '0', opacity:'0', margin:'0' }), animate(400) ]),
   //     transition(':leave', [animate(400, style({ height: '0', opacity:'0', margin:'0' })) ]),
   //     state('*', style({ height: '*', opacity:'1', margin:'*' })), ])
   //   ]
-  })
+})
 export class ProdYServComponent {
 
-  uploadPercent:Observable<number>;
-  
-  heightNewForm='0';
-  opacityNewCForm='0';
-  transitionNewForm='';
+  uploadPercent: Observable<number>;
+
+  heightNewForm = '0';
+  opacityNewCForm = '0';
+  transitionNewForm = '';
   // Variables Servicios
-  showNewServ=false;
+  showNewServ = false;
   descripcionS;
   precioS;
   displayedColumnsS: string[] = ['descripcion', 'precio', 'acciones'];
@@ -36,30 +36,30 @@ export class ProdYServComponent {
   @ViewChild(MatSort) sortS: MatSort;
   servicios;
   // Variables Productos
-  showNewProd=false;
+  showNewProd = false;
   skuP;
   nombreP;
   precioP;
-  displayedColumnsP: string[] = ['sku', 'nombre','precio', 'foto','acciones'];
+  displayedColumnsP: string[] = ['sku', 'nombre', 'precio', 'foto', 'acciones'];
   dataSourceP = new MatTableDataSource();
-  @ViewChild('paginatorP', {read:MatPaginator}) paginatorP: MatPaginator;
-  @ViewChild('sortProductos', {read: MatSort}) sortP: MatSort;
+  @ViewChild('paginatorP', { read: MatPaginator }) paginatorP: MatPaginator;
+  @ViewChild('sortProductos', { read: MatSort }) sortP: MatSort;
   productos;
 
-  constructor( public _serviciosS:ServicioService,
-              public _productosS: ProductoService,
-              public storage: AngularFireStorage){
-    this._serviciosS.getServicios().subscribe(servs=>{
-      this.servicios=servs;
-      this.dataSourceS.data=servs;
+  constructor(public _serviciosS: ServicioService,
+    public _productosS: ProductoService,
+    public storage: AngularFireStorage) {
+    this._serviciosS.getServicios().subscribe(servs => {
+      this.servicios = servs;
+      this.dataSourceS.data = servs;
       this.dataSourceS.paginator = this.paginatorS;
       this.dataSourceS.sort = this.sortS;
     })
-    this._productosS.getProductos().subscribe(prods=>{
-      this.productos=prods;
-      this.dataSourceP.data=prods;
+    this._productosS.getProductos().subscribe(prods => {
+      this.productos = prods;
+      this.dataSourceP.data = prods;
       this.dataSourceP.paginator = this.paginatorP;
-      this.dataSourceP.sort= this.sortP;
+      this.dataSourceP.sort = this.sortP;
     })
   }
 
@@ -76,70 +76,70 @@ export class ProdYServComponent {
     }
   }
 
-  eliminarServicio(d, idS){
-    let res= confirm('Desea eliminar el servicio: ' + d + '?');
-    if(res==true){
+  eliminarServicio(d, idS) {
+    let res = confirm('Desea eliminar el servicio: ' + d + '?');
+    if (res == true) {
       this._serviciosS.deleteServicio(idS);
-    }else{
+    } else {
       alert('Servicio NO eliminado');
-    }    
+    }
   }
-  eliminarProducto(n, idP){
-    let res= confirm('Desea eliminar el producto: ' + n + '?');
-    if(res==true){
+  eliminarProducto(n, idP) {
+    let res = confirm('Desea eliminar el producto: ' + n + '?');
+    if (res == true) {
       this._productosS.deleteProducto(idP);
-    }else{
+    } else {
       alert('Producto NO eliminado');
-    }    
+    }
   }
 
-  guardarNuevoServicio(){
-    console.log('Se guardo el nuevo Servicio: ' + this.descripcionS + ' a un precio de $' + this.precioS );
-    this._serviciosS.saveServicio({descripcion:this.descripcionS, precio:this.precioS});
+  guardarNuevoServicio() {
+    console.log('Se guardo el nuevo Servicio: ' + this.descripcionS + ' a un precio de $' + this.precioS);
+    this._serviciosS.saveServicio({ descripcion: this.descripcionS, precio: this.precioS });
     this.hideForm();
   }
-  guardarNuevoProducto(){
-    console.log('Se guardo el nuevo Producto: ' + this.nombreP + ' a un precio de $' + this.precioP );
-    this._productosS.saveProducto({sku:this.skuP, nombre:this.nombreP, precio:this.precioP})
+  guardarNuevoProducto() {
+    console.log('Se guardo el nuevo Producto: ' + this.nombreP + ' a un precio de $' + this.precioP);
+    this._productosS.saveProducto({ sku: this.skuP, nombre: this.nombreP, precio: this.precioP })
     this.hideForm();
   }
- 
-  subirFoto(event, prod){
-    prod.showProgressBar=true;
+
+  subirFoto(event, prod) {
+    prod.showProgressBar = true;
     const file = event.target.files[0];
-    const filePath = 'PIC-'+prod.uid;
+    const filePath = 'PIC-' + prod.uid;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath,file);
+    const task = this.storage.upload(filePath, file);
     // observe percentage changes
     this.uploadPercent = task.percentageChanges();
     // download url
     task.snapshotChanges().pipe(
       finalize(() => {
-        fileRef.getDownloadURL().subscribe(url=>{
+        fileRef.getDownloadURL().subscribe(url => {
           prod.photourl = url;
-          prod.showProgressBar=false;
+          prod.showProgressBar = false;
           delete prod.showProgressBar;
           this._productosS.updateProducto(prod);
         })
-       })
-   )
-  // .subscribe(url=>{
-  //       console.log(url);
-  //   })
+      })
+    )
+    // .subscribe(url=>{
+    //       console.log(url);
+    //   })
   }
 
-  sendTab(ev){
+  sendTab(ev) {
     console.log(ev);
   }
-  showForm(){
-    this.heightNewForm='4em';
-    this.opacityNewCForm='1';
-    this.transitionNewForm="all 1s";
+  showForm() {
+    this.heightNewForm = '4em';
+    this.opacityNewCForm = '1';
+    this.transitionNewForm = "all 1s";
   }
 
-  hideForm(){
-    this.heightNewForm='0';
-    this.opacityNewCForm='0';
-    this.transitionNewForm="opacity 0.5s, height 1s";
+  hideForm() {
+    this.heightNewForm = '0';
+    this.opacityNewCForm = '0';
+    this.transitionNewForm = "opacity 0.5s, height 1s";
   }
 }

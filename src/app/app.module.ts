@@ -5,34 +5,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, Validators, ReactiveFormsModule} from '@angular/forms';
-  
+import { FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
+
 // Firebase ====================
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireStorageModule } from 'angularfire2/storage';
- 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 // Angular Material ====================
-import {MatFormFieldModule} from '@angular/material/form-field'
-import {MatInputModule} from '@angular/material/input'
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input'
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material";
-import {MAT_DATE_LOCALE} from '@angular/material';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 // Servicios ==========================
 import { AuthService } from './services/auth.service';
@@ -57,18 +57,20 @@ import { RecibosComponent } from './components/recibos.component';
 
 // Rutas =============================
 const routes: Routes = [
-  { path:'', component: LayoutComponent ,children:[
-    { path:'', component: VentaComponent},
-    { path:'db', component: DashboardComponent},
-    { path:'pys', component: ProdYServComponent},
-    { path:'tickets', component: RecibosComponent},
-    { path:'users', component: UsersComponent},
-    { path:'clientes', component: ClientesComponent},
-  ]},
-  { path:'login', component: LoginComponent},
-  { path:'**', redirectTo: '', pathMatch: 'full'}
+  {
+    path: '', component: LayoutComponent, children: [
+      { path: '', component: VentaComponent },
+      { path: 'db', component: DashboardComponent },
+      { path: 'pys', component: ProdYServComponent },
+      { path: 'tickets', component: RecibosComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'clientes', component: ClientesComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,11 +82,11 @@ const routes: Routes = [
     VentaComponent,
     ProdYServComponent,
     BuscarAgregarClienteComponent,
-    CobrarComponent, 
-    TicketComponent, 
+    CobrarComponent,
+    TicketComponent,
     RecibosComponent
   ],
-  entryComponents:[BuscarAgregarClienteComponent, CobrarComponent, TicketComponent],
+  entryComponents: [BuscarAgregarClienteComponent, CobrarComponent, TicketComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -109,7 +111,9 @@ const routes: Routes = [
     ProductoService,
     ClienteService,
     ReciboService,
-    {provide: MAT_DATE_LOCALE, useValue: 'es-MX'}
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' },
+    { provide: FirestoreSettingsToken, useValue: {} }
+
   ],
   bootstrap: [AppComponent]
 })

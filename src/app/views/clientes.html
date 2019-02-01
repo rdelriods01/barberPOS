@@ -1,77 +1,84 @@
 <div class="all">
-    <div class="header">
-        <h3>Clientes</h3>
-    </div>
-    <mat-card>
-        <form #formNewCliente="ngForm">
-            <div class="sup">
-                <div></div>
-                <button *ngIf="!showNewCliente" mat-raised-button class="supBtns" (click)="showNewCliente=!showNewCliente; showForm()">Agregar nuevo cliente</button>
-                <div class="supBtns">
-                    <button *ngIf="showNewCliente" color="accent" mat-raised-button (click)="showNewCliente=!showNewCliente; hideForm()"> <mat-icon>arrow_back</mat-icon> </button>
-                    <button *ngIf="showNewCliente" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewCliente=!showNewCliente; guardarCliente()" [disabled]="!formNewCliente.form.valid">Guardar</button>
-                </div>
-            </div>
-            <div class="newForm" [style.height]="heightNewForm" [style.transition]="transitionNewForm" [style.opacity]="opacityNewCForm" >
-                <h3>Ingresa los datos del Cliente</h3>
-                <div class="gridNewClient">
-                    <mat-form-field>
-                        <input matInput name="nombre" [(ngModel)]="cliente.nombre" placeholder="Nombre" required >
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput name="apellido" [(ngModel)]="cliente.apellido" placeholder="Apellido" required >
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput pattern="[0-9]{10}" name="telefono" [(ngModel)]="cliente.telefono" placeholder="Teléfono 12345678" required>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput name="correo" [(ngModel)]="cliente.correo" placeholder="E-mail">
-                    </mat-form-field> 
-                </div>                  
-            </div>
-        </form>
-        <div class="tabla">
-            <div class="tablaBuscar">
-                <mat-form-field class="buscarInput">
-                    <input matInput (keyup)="filtrarC($event.target.value)" placeholder="Filtrar o buscar...">
-                </mat-form-field>
-            </div>
-            
-            <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSourceC" matSort >
-                
-                    <!-- Nombre Column -->
-                    <ng-container matColumnDef="nombre">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                    <td mat-cell *matCellDef="let row"> 
-                        {{row.nombre}}
-                        {{row.apellido}} 
-                    </td>
-                    </ng-container>
-                
-                    <!-- Telefono Column -->
-                    <ng-container matColumnDef="telefono">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
-                    <td mat-cell *matCellDef="let row"> {{row.telefono}} </td>
-                    </ng-container>
-
-                    <!-- Acciones Column -->
-                    <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                    <td mat-cell *matCellDef="let row" > 
-                        <div >
-                            <button mat-raised-button class="selectBtn" color="accent"  (click)="editarCliente(row)" >Editar</button>
-                            <button *ngIf="_layoutC.user.role=='admin'" class="deleteBtn" color="warn" mat-raised-button (click)="eliminarCliente(row.uid)"  > <mat-icon>delete</mat-icon></button>
-                        </div> 
-                    </td>
-                    </ng-container>
-                
-                    <tr mat-header-row *matHeaderRowDef="displayedColumnsC"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumnsC;">
-                    </tr>
-                </table>
-                <mat-paginator #paginatorC [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-            </div>                              
+  <div class="header">
+    <h3>Clientes</h3>
+  </div>
+  <mat-card>
+    <form #formNewCliente="ngForm">
+      <div class="sup">
+        <div></div>
+        <button *ngIf="!showNewCliente" mat-raised-button class="supBtns" (click)="showNewCliente=!showNewCliente; showForm()">Agregar
+          nuevo cliente</button>
+        <div class="supBtns">
+          <button *ngIf="showNewCliente" color="accent" mat-raised-button (click)="showNewCliente=!showNewCliente; hideForm()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <button *ngIf="showNewCliente" color="primary" mat-raised-button class="mainSupBtn" (click)="showNewCliente=!showNewCliente; guardarCliente()"
+            [disabled]="!formNewCliente.form.valid">Guardar</button>
         </div>
-    </mat-card>
+      </div>
+      <div class="newForm" [style.height]="heightNewForm" [style.transition]="transitionNewForm" [style.opacity]="opacityNewCForm">
+        <h3>Ingresa los datos del Cliente</h3>
+        <div class="gridNewClient">
+          <mat-form-field>
+            <input matInput name="nombre" [(ngModel)]="cliente.nombre" placeholder="Nombre" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="apellido" [(ngModel)]="cliente.apellido" placeholder="Apellido" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput pattern="[0-9]{10}" name="telefono" [(ngModel)]="cliente.telefono" placeholder="Teléfono"
+              required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="correo" [(ngModel)]="cliente.correo" placeholder="E-mail">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="tabla">
+      <div class="tablaBuscar">
+        <mat-form-field class="buscarInput">
+          <input matInput (keyup)="filtrarC($event.target.value)" placeholder="Filtrar o buscar...">
+        </mat-form-field>
+      </div>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceC" matSort>
+
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let row">
+              {{row.nombre}}
+              {{row.apellido}}
+            </td>
+          </ng-container>
+
+          <!-- Telefono Column -->
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+            <td mat-cell *matCellDef="let row"> {{row.telefono}} </td>
+          </ng-container>
+
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let row">
+              <div>
+                <button mat-raised-button class="selectBtn" color="accent" (click)="editarCliente(row)">Editar</button>
+                <button *ngIf="_layoutC.user.role=='admin'" class="deleteBtn" color="warn" mat-raised-button (click)="eliminarCliente(row.uid)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsC"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsC;">
+          </tr>
+        </table>
+        <mat-paginator #paginatorC [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+    </div>
+  </mat-card>
 </div>

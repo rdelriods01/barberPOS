@@ -5,7 +5,7 @@
   "background_color": "#444444",
   "display": "standalone",
   "orientation": "landscape",
-  "scope": "/",
+  "Scope": "/",
   "start_url": "/",
   "icons": [
     {
@@ -48,5 +48,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "splash_pages": null
 }
